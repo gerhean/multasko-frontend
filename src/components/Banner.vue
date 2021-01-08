@@ -1,8 +1,8 @@
 <template lang="pug">
     .banner
-        .date {{ data.date }}
+        .date(v-on:click=toggleBanner) {{ data.date }}
         .border-line
-        .holder
+        .holder(v-if="isBannerOpen")
             Note(v-for="(noteGroup, idx) in data.memos"
                 :notes="noteGroup"
                 :key="idx"
@@ -11,13 +11,27 @@
 
 <script>
 import Note from './Note.vue';
+
 export default {
   name: 'Banner',
-  components: {
-      Note,
+  data: function () {
+    return {
+      isBannerOpen: true,
+    }
   },
+
+  components: {
+    Note,
+  },
+
   props: {
       data: Object, 
+  },
+
+  methods: {
+    toggleBanner() {
+      this.isBannerOpen = !this.isBannerOpen;
+    }
   },
 }
 </script>
