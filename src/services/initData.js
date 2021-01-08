@@ -263,6 +263,10 @@ export async function postMemo(text, priority_level) {
 	}
 }
 
+export async function postCategory(categoryNames) {
+	axios.post(MEMO_URL, categoryNames.map((name) => ({ "name": name })));
+}
+
 populateListOfCategories(); // remove after API function is completed
 
 const service = {
