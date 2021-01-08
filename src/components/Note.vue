@@ -4,6 +4,10 @@
     apexchart.priority(type="donut", width="90",
         :options="chartOptions", :series="chartData")
     .timestamp {{ topNote.date_posted[1] | formatTime }}
+//- .note-container
+//-   // https://stackoverflow.com/questions/7324722/cut-corners-using-css 
+//-   .note-stack.note-stack-one
+//-     .corner
 </template>
 
 <script>
@@ -82,37 +86,58 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "../styles/mixin.scss";
-
 .note {
-    position: relative;
-    width: 250px;
-    height: 250px;
-    background-color: $note-color;
-    padding: 1rem;
-    margin-top: 2rem;
-    margin-right: 2rem;
-    overflow: hidden;
-    border-radius: 12px 12px 12px 0px;
-    .note-content {
-        font-size: 14px;
-        text-align: justify;
-        color: $written-words; 
-    }
-    .priority {
-        position: absolute;
-        top: 190px;
-        left: 0px;
-        z-index: 3;
-    }
-    .timestamp {
-        font-size: 12px;
-        font-weight: 500;
-        color: rgb(146, 146, 146);
-        position: absolute;
-        top: 220px;
-        right: 10px;
-        z-index: 2;
-    }
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background-color: $note-color;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  overflow: hidden;
+  border-radius: 12px 12px 12px 0px;
+  z-index: 1;
+
+  .note-content {
+      font-size: 14px;
+      text-align: justify;
+      color: $written-words; 
+  }
+  .priority {
+      position: absolute;
+      top: 190px;
+      left: 0px;
+      z-index: 3;
+  }
+  .timestamp {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgb(146, 146, 146);
+      position: absolute;
+      top: 220px;
+      right: 10px;
+      z-index: 3;
+  }   
+}
+.note-stack {
+  width: 250px;
+  height: 30px;
+  background-color: $note-color;
+  border-radius: 12px 12px 12px 0px;
+  z-index: 1;
+  .corner {
+    position: absolute;
+    bottom: 100;
+    left: 0;
+    border-width: 0 16px 16px 0;
+    border-style: solid;
+    border-color: white $note-color-dark; 
+  }
+}
+
+note-stack-one {
+  position: absolute;
+  top: 280px;
 }
 
 .note:before {
