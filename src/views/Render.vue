@@ -72,13 +72,19 @@
                     </div>
                 </ul>
             </aside>
+            <div class="profile">
+                <i class="mdi mdi-48px mdi-account-circle"></i> 
+                <span class="name"> {{ username }} </span>
+            </div>
         </div>
 
-        <router-view/>
+        <transition appear name="change-view-transition">
+            <router-view/>
+        </transition>
 
         <i class="add-memo mdi mdi-36px mdi-plus-circle-outline" @click="openAddMemo"/>
 
-        <transition name="add-memo-panel">
+        <transition name="add-memo-panel-transition">
             <div v-if="isAddingMemo" class="add-memo-panel modal is-active">
                 <div class="modal-background"></div>
                 <div class="modal-card">
@@ -131,6 +137,7 @@ export default {
           addMemoContent: '',
           selectedNotePriority: 0,
           selectedOption: 'home',
+          username: 'John Doe',
       }
   },
   methods: {
@@ -160,10 +167,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "../styles/mixin.scss";
-
-.hi {
-    z-index: 100;
-}
 
 .layout {
     display: flex;
@@ -202,6 +205,27 @@ export default {
     .menu {
         font-size: 18px;
         padding: 2rem 0rem;
+    }
+    .profile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        // left: 35px;
+        bottom: 35px;
+        width: 100%;
+        color: white;
+        opacity: 0.8;
+        .name {
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 2px;
+            padding-left: 0.5rem;
+        }
+    }
+    .profile:hover {
+        opacity: 1;
+        cursor: pointer;
     }
 }
 
@@ -243,13 +267,22 @@ export default {
     }
 }
 
-.add-memo-panel-enter-active {
+.add-memo-panel-transition-enter-active {
     transition: all 0.3s ease;
 }
 
-.add-memo-panel-enter, .add-memo-panel-leave-to {
+.add-memo-panel-transition-enter, .add-memo-panel-transition-leave-to {
     transform: translateY(-15px);
     opacity: 0;
+}
+
+.change-view-transition-enter-active {
+    transition: all 1s ease;
+}
+
+.change-view-transition-enter, .change-view-transition-leave-to {
+	transform: translateX(-40px);
+	opacity: 0;
 }
 
 </style>

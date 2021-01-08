@@ -162,7 +162,11 @@ let multaskoCategoriesData = {
 	],
 };
 
-export function init() {
+export function initHomeData() {
+	// call backend
+}
+
+export function initCategoriesData() {
 	// call backend
 }
 
