@@ -1,88 +1,61 @@
-<template>
-    <div class="layout">
-        <div class="side-panel"> 
-            <div class="multasko">
+<template lang="pug">
+    .layout
+        .side-panel
+            .multasko
                 MULTASKO
-            </div>
-            <div class="search">
-                <div class="field">
-                    <div class="control has-icons-left">
-                        <input class="input is-info" type="text">
-                        <span class="icon is-left">
-                            <i class="mdi mdi-18px mdi-magnify"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <aside class="menu">
-                <ul class="menu-list">
-                    <router-link to="/">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-home"></i>
-                            &nbsp;
-                            <span>Home</span>
-                        </a></li>
-                    </router-link>
-                    <router-link to="/categories">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-folder"></i>
-                            &nbsp;
-                            <span>Categories</span>
-                        </a></li>
-                    </router-link>
-                    <router-link to="/calendar">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-calendar"></i>
-                            &nbsp;
-                            <span>Calendar</span>
-                        </a></li>
-                    </router-link>
-                    <router-link to="/transfer">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-swap-horizontal"></i>
-                            &nbsp;
-                            <span>Transfer</span>
-                        </a></li>
-                    </router-link>
-                    <router-link to="/analytics">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-google-analytics"></i>
-                            &nbsp;
-                            <span>Analytics</span>
-                        </a></li>
-                    </router-link>
-                    <router-link to="/settings">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-cogs"></i>
-                            &nbsp;
-                            <span>Settings</span>
-                        </a></li>
-                    </router-link>
-                </ul>
-            </aside>
-        </div>
+            .search
+                .field
+                    .control.has-icons-left
+                        input.input.is-info(type="text")
+                        span.icon.is-left
+                            i.mdi.mdi-18px.mdi-magnify
+            aside.menu
+                ul.menu-list
+                    router-link(to="/")
+                        li
+                            a
+                                i.mdi.mdi-24px.mdi-home
+                                span &nbsp; Home
+                    router-link(to="/categories")
+                        li
+                            a
+                                i.mdi.mdi-24px.mdi-folder
+                                span &nbsp; Categories
+                    router-link(to="/calendar")
+                        li
+                            a
+                                i.mdi.mdi-24px.mdi-calendar
+                                span &nbsp; Calendar
+                    router-link(to="/transfer")
+                        li
+                            a
+                                i.mdi.mdi-24px.mdi-swap-horizontal
+                                span &nbsp; Transfer
+                    router-link(to="/analytics")
+                        li
+                            a
+                                i.mdi.mdi-24px.mdi-google-analytics
+                                span &nbsp; Analytics
+                    router-link(to="/settings")
+                        li
+                            a
+                                i.mdi.mdi-24px.mdi-cogs
+                                span &nbsp; Settings
+        
+        router-view
 
-        <router-view/>
+        i.add-memo.mdi.mdi-36px.mdi-plus-circle-outline(@click="toggleAddMemo")
 
-        <i class="add-memo mdi mdi-36px mdi-plus-circle-outline" @click="toggleAddMemo"/>
-
-        <div class="modal" :class="{'is-active': isAddingMemo}">
-            <div class="modal-background" @click="toggleAddMemo"></div>
-            <div class="modal-card">
-                <header class="modal-card-head">
-                <p class="modal-card-title">Modal title</p>
-                <button class="delete" aria-label="close" @click="toggleAddMemo"></button>
-                </header>
-                <section class="modal-card-body">
-                <!-- Content ... -->
-                </section>
-                <footer class="modal-card-foot">
-                <button class="button is-success">Save changes</button>
-                <button class="button" @click="toggleAddMemo">Cancel</button>
-                </footer>
-            </div>
-        </div>
-    </div>
+        .modal(:class="{'is-active': isAddingMemo}")
+            .modal-background(@click="toggleAddMemo")
+            .modal-card
+                header.modal-card-head
+                    p.modal-card-title Modal title
+                    button.delete(aria-label="close" @click="toggleAddMemo")
+                section.modal-card-body <!-- Content ... -->
+                footer.modal-card-foot
+                button.button.is-success Save changes
+                button.button(@click="toggleAddMemo") Cancel
 </template>
 
 <script>
