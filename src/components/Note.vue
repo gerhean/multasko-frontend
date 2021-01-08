@@ -120,7 +120,7 @@ export default {
   },
   methods: {
       emitOpenNoteViewerNote() {
-          console.log('emit note open');
+        //   console.log('emit note open');
           this.$emit('viewnote', this.notes);
       },
   },

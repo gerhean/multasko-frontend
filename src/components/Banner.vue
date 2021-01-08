@@ -38,7 +38,7 @@ export default {
       this.isBannerOpen = !this.isBannerOpen;
     },
     emitOpenNoteViewerBanner(data) {
-        console.log('emit banner open note view');
+        // console.log('emit banner open note view');
         this.$emit('viewnote', data);
     },
   },

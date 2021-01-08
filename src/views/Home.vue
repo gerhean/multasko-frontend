@@ -25,7 +25,7 @@ export default {
   },
   methods: {
       emitOpenNoteViewerHome(data) {
-          console.log('emit home open note viewer');
+        //   console.log('emit home open note viewer');
           this.$emit('viewnote', data);
       }
   },

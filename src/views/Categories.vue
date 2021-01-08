@@ -69,7 +69,7 @@ export default {
   },
   methods: {
       emitOpenNoteViewerCategories(data) {
-        console.log('emit categories open note viewer');
+        // console.log('emit categories open note viewer');
         this.$emit('viewnote', data); 
       },
       postCategory() {
