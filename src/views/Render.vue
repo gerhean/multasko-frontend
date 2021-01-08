@@ -7,7 +7,8 @@
             <div class="search">
                 <div class="field">
                     <div class="control has-icons-left">
-                        <input class="input is-info" type="text" placeholder="Finding something?">
+                        <input class="input is-info" type="text" placeholder="Finding something?" 
+                          v-model="searchQuery" v-on:keyup.enter="onEnterSearchQuery">
                         <span class="icon is-left">
                             <i class="mdi mdi-18px mdi-magnify" style="color: black"></i>
                         </span>
@@ -162,6 +163,7 @@ export default {
   },
   data() {
       return {
+          searchQuery: '',
           isViewingNotes: false,
           isAddingMemo: false,
           addMemoContent: '',
@@ -173,6 +175,11 @@ export default {
       }
   },
   methods: {
+      onEnterSearchQuery() {
+        if(this.searchQuery != '') {
+          this.$router.push({path: 'search', search: { plan: this.searchQuery }});
+        }
+      },
       openNoteViewer(data) {
           console.log(data);
           console.log('openNoteViewerRender')

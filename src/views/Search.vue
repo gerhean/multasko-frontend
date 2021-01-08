@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     foundMemos: function() {
-      return searchMemo(this.$route.query);
+      return searchMemo(this.$route.query.search);
     },
   }
 }
