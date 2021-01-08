@@ -9,167 +9,204 @@ const CATEGORY_URL = "https://multasko-backend.herokuapp.com/api/category";
 // let lastMemoTime = 1610087437;
 
 let multaskoHomeData = {
-  data: [
-    {
-      date: 'January 6',
-      memos: [
-        [
-          {
-            text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
-            priority_level: 0,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 1,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-        ],
-        [
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            timestamp: '9:37pm',
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-        ]
-      ],
-    },
-    {
-      date: 'January 6',
-      memos: [
-        [
-          {
-            text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-        ],
-      ],
-    },
-  ],
+	data: [
+		{
+			date: 'January 6',
+			memos: [
+				[
+					{
+						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
+						priority_level: 0,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+				],
+			],
+		},
+		{
+			date: 'January 6',
+			memos: [
+				[
+					{
+						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
+						priority_level: 0,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 1,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
+						priority_level: 2,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+				],
+				[
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						timestamp: '9:37pm',
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+				]
+			],
+		},
+		{
+			date: 'January 6',
+			memos: [
+				[
+					{
+						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
+						priority_level: 2,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+				],
+			],
+		},
+	],
 };
 
 let multaskoCategoriesData = {
-  data: [
-    {
-      id: -1,
-      name: 'Dancing',
-      memos: [
-        [
-          {
-            text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
-            priority_level: 0,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 1,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-        ],
-        [
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            timestamp: '9:37pm',
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-        ]
-      ],
-    },
-    {
-      id: -2,
-      name: 'Singing',
-      memos: [
-        [
-          {
-            text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-          {
-            text: 'Have a predefined category called "purely transferring"',
-            priority_level: 2,
-            date_posted: ["2021-01-08","07:21:46"],
-          },
-        ],
-      ],
-    },
-  ],
+	data: [
+		{
+			id: -1,
+			name: 'Dancing',
+			memos: [
+				[
+					{
+						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
+						priority_level: 0,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 1,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+				],
+				[
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+				]
+			],
+		},
+		{
+			id: -2,
+			name: 'Singing',
+			memos: [
+				[
+					{
+						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 0,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+					{
+						text: 'Have a predefined category called "purely transferring"',
+						priority_level: 2,
+						text_type: 1,
+						date_posted: ["2021-01-08","07:21:46"],
+					},
+				],
+			],
+		},
+	],
 };
 
 let multaskoListOfCategories = [

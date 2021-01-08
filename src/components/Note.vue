@@ -1,14 +1,22 @@
-<template lang="pug">
-.note
-    .note-content {{ topNote.text }}
-    apexchart.priority(type="donut", width="90",
-        :options="chartOptions", :series="chartData")
-    .note-count {{ notes.length }} notes
-    .timestamp {{ topNote.date_posted[1] | formatTime }}
-//- .note-container
-//-   // https://stackoverflow.com/questions/7324722/cut-corners-using-css 
-//-   .note-stack.note-stack-one
-//-     .corner
+<template>
+	<div class="note">
+		<div class="note-content">{{ topNote.text }}</div>
+		<div v-if="hasOnlyOneNote" class="priority-one-note" 
+			:class="{
+				'low': topNote.priority_level == 0,
+				'medium': topNote.priority_level == 1,
+				'high': topNote.priority_level == 2,
+			}"
+		>
+		</div>
+		<apexchart v-else class="priority-multiple-notes" type="donut" width="90" :options="chartOptions" :series="chartData"></apexchart>
+		<div v-if="!hasOnlyOneNote" class="note-count"> {{ notes.length }} Notes </div>
+		<div class="timestamp">{{ topNote.date_posted[1] | formatTime }}</div>
+	</div>
+<!-- - .note-container
+-   // https://stackoverflow.com/questions/7324722/cut-corners-using-css 
+-   .note-stack.note-stack-one
+-     .corner -->
 </template>
 
 <script>
@@ -25,7 +33,7 @@ export default {
   data: function () {
     return {
       chartOptions: {
-        stroke:{
+        stroke: {
          colors:['#efe9cc']
         },
         dataLabels: {
@@ -69,6 +77,9 @@ export default {
   },
 
   computed: {
+	hasOnlyOneNote: function() {
+		return this.notes.length == 1;
+	},
     topNote: function () {
       return this.notes[this.notes.length - 1]
     },
@@ -88,87 +99,108 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/mixin.scss";
 .note {
-  position: relative;
-  width: 250px;
-  height: 250px;
-  background-color: $note-color;
-  padding: 1rem;
-  margin-top: 2rem;
-  margin-right: 2rem;
-  overflow: hidden;
-  border-radius: 12px 12px 12px 0px;
-  z-index: 1;
-
-  .note-content {
-      font-size: 14px;
-      text-align: justify;
-      color: $written-words; 
-  }
-  .priority {
-      position: absolute;
-      top: 190px;
-      left: 0px;
-      z-index: 3;
-  }
-  .note-count {
-    font-size: 12px;
-    font-weight: 500;
-    color: rgb(146, 146, 146);
-    position: absolute;
-    top: 220px;
-    right: 10px;
-    z-index: 3;
-  }
-  .timestamp {
-    font-size: 12px;
-    font-weight: 500;
-    color: rgb(146, 146, 146);
-    position: absolute;
-    top: 200px;
-    right: 10px;
-    z-index: 3;
-  }   
+	position: relative;
+	width: 250px;
+	height: 250px;
+	background-color: $note-color;
+	padding: 1rem;
+	margin-top: 2rem;
+	margin-right: 2rem;
+	overflow: hidden;
+	border-radius: 12px 12px 12px 0px;
+	z-index: 1;
+	.note-content {
+		font-size: 14px;
+		text-align: justify;
+		color: $written-words; 
+	}
+	.priority-one-note {
+		position: absolute;
+		top: 200px;
+		left: 0;
+		z-index: 3;
+		height: 20px;
+		width: 80px;
+		border-top-right-radius: 10px;
+		border-bottom-right-radius: 10px;
+	}
+	.high {
+		background-color: $note-priority-high;
+	}
+	.medium {
+		background-color: $note-priority-medium;
+	}
+	.low {
+		background-color: $note-priority-low;
+	}
+	.priority-multiple-notes {
+		position: absolute;
+		top: 190px;
+		left: 0px;
+		z-index: 3;
+	}
+	.note-count {
+		font-size: 14px;
+		font-weight: 600;
+		color: rgb(146, 146, 146);
+		position: absolute;
+		top: 185px;
+		right: 0px;
+		z-index: 3;
+		background-color: lightgrey;
+		padding: 0rem 0.5rem;
+	}
+	.timestamp {
+		font-size: 12px;
+		font-weight: 500;
+		color: rgb(146, 146, 146);
+		position: absolute;
+		top: 220px;
+		right: 10px;
+		z-index: 3;
+	}   
 }
+
 .note-stack {
-  width: 250px;
-  height: 30px;
-  background-color: $note-color;
-  border-radius: 12px 12px 12px 0px;
-  z-index: 1;
-  .corner {
-    position: absolute;
-    bottom: 100;
-    left: 0;
-    border-width: 0 16px 16px 0;
-    border-style: solid;
-    border-color: white $note-color-dark; 
-  }
+	width: 250px;
+	height: 30px;
+	background-color: $note-color;
+	border-radius: 12px 12px 12px 0px;
+	z-index: 1;
+	.corner {
+		position: absolute;
+		bottom: 100;
+		left: 0;
+		border-width: 0 16px 16px 0;
+		border-style: solid;
+		border-color: white $note-color-dark; 
+	}
 }
 
 note-stack-one {
-  position: absolute;
-  top: 280px;
+	position: absolute;
+	top: 280px;
 }
 
 .note:before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-width: 0 16px 16px 0;
-    border-style: solid;
-    border-color: white $note-color-dark; 
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	border-width: 0 16px 16px 0;
+	border-style: solid;
+	border-color: white $note-color-dark; 
 }
 
 .note::after {
-    display: flex;
-    justify-content: center;
-    content: "";
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    height: 130px;
-    background: linear-gradient(transparent, $note-color 50%);
-    z-index: 1;
+	display: flex;
+	justify-content: center;
+	content: "";
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	height: 140px;
+	background: linear-gradient(transparent, $note-color 50%);
+	z-index: 1;
 }
 </style>
