@@ -4,6 +4,7 @@
             :data="data"
             :isCategories="false"
             :key="idx"
+			@viewnote="emitOpenNoteViewerSearch"
         />
     </div>
 </template>
@@ -13,15 +14,21 @@ import Banner from '../components/Banner.vue';
 import { searchMemo } from '../services/initData'; 
 
 export default {
-  name: 'Home',
+  name: 'Search',
   components: {
       Banner,
   },
   computed: {
     foundMemos: function() {
       return searchMemo(this.$route.query.search);
-    },
-  }
+	},
+  },
+  methods: {
+	emitOpenNoteViewerSearch(data) {
+		// console.log('emit search open note view');
+		this.$emit('viewnote', data);
+	},
+  },
 }
 </script>
 
