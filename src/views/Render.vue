@@ -1,9 +1,11 @@
 <template>
     <div class="layout">
         <div class="side-panel"> 
-            <div class="multasko">
-                MULTASKO
-            </div>
+            <router-link to="/">
+                <div class="multasko" @click="selectedOption = 'home'">
+                    MULTASKO
+                </div>
+            </router-link>
             <div class="search">
                 <div class="field">
                     <div class="control has-icons-left">
