@@ -4,7 +4,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 const MEMO_URL = "https://multasko-backend.herokuapp.com/api/memo";
-// const CATEGORY_URL = "https://multasko-backend.herokuapp.com/api/category";
+const CATEGORY_URL = "https://multasko-backend.herokuapp.com/api/category";
 // let lastMemoTime = 1610087437;
 
 let multaskoHomeData = {
@@ -91,7 +91,7 @@ let multaskoHomeData = {
 let multaskoCategoriesData = {
 	data: [
 		{
-			category: 'Sports',
+			name: 'Dancing',
 			memos: [
 				[
 					{
@@ -130,7 +130,7 @@ let multaskoCategoriesData = {
 			],
 		},
 		{
-			category: 'music',
+			name: 'Singing',
 			memos: [
 				[
 					{
@@ -227,8 +227,12 @@ export async function initHomeData() {
 	multaskoHomeData.data = homeData;
 }
 
-export function initCategoriesData() {
-
+export async function initCategoriesData() {
+	const response = await axios ({
+		url: CATEGORY_URL,
+		method: "GET"
+	});
+	multaskoCategoriesData.data = response.data.categories;
 }
 
 const service = {
