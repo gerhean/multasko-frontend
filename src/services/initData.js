@@ -3,6 +3,7 @@ import axios from 'axios';
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
+
 const MEMO_URL = "https://multasko-backend.herokuapp.com/api/memo";
 const CATEGORY_URL = "https://multasko-backend.herokuapp.com/api/category";
 // let lastMemoTime = 1610087437;
