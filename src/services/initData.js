@@ -77,7 +77,7 @@ let multaskoData = {
 						priorityLevel: 2,
 						timestamp: '8:37pm',
 					},
-					],
+				],
 			],
 		},
 	],

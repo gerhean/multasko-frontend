@@ -1,18 +1,9 @@
 <template lang="pug">
 .note
     .note-content {{ topNote.content }}
-    .holder
-        .priorities priorities
-        // check priority level and assign class accordingly for css color
-        .priority(:class=`{
-				'low': topNote.priorityLevel == 0,
-				'medium': topNote.priorityLevel == 1,
-				'high': topNote.priorityLevel == 2,
-			}`
-		)
-        apexchart(type="donut", width="380",
-            :options="chartOptions", :series="chartData")
-        .timestamp {{ topNote.timestamp }}
+    apexchart.priority(type="donut", width="90",
+        :options="chartOptions", :series="chartData")
+    .timestamp {{ topNote.timestamp }}
 </template>
 
 <script>
@@ -24,12 +15,22 @@ export default {
   data: function () {
     return {
       chartOptions: {
-        chart: {
-          width: 380,
-          type: 'donut',
+        stroke:{
+         colors:['#efe9cc']
         },
         dataLabels: {
           enabled: false
+        },
+        labels: ['Low', 'Medium', 'High'],
+        fill: {
+          colors: ['#79DE79', '#FFE662', '#FB6962']
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              size: '40%'
+            }
+          }
         },
         responsive: [{
           breakpoint: 480,
@@ -42,9 +43,9 @@ export default {
             }
           }
         }],
-        fill: {
-          colors: ['#F44336', '#E91E63', '#9C27B0']
-        }
+        legend: {
+          show: false
+        },
       },
     }
   },
@@ -64,7 +65,7 @@ export default {
 
     chartData: function () {
       const data = [0, 0, 0];
-      for (const note in this.notes) {
+      for (const note of this.notes) {
           data[note.priorityLevel] += 1;
       }
       return data;
@@ -92,41 +93,20 @@ export default {
         text-align: justify;
         color: rgb(110, 110, 110);
     }
-    .holder {
-        .priorities {
-            position: absolute;
-            left: 20px;
-            bottom: 20px;
-            z-index: 2;
-        }
-        .priority {
-            position: absolute;
-            bottom: 35px;
-            right: 0;
-            z-index: 2;
-            height: 20px;
-            width: 70px;
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-        }
-        .high {
-            background-color: $note-priority-high;
-        }
-        .medium {
-            background-color: $note-priority-medium;
-        }
-        .low {
-            background-color: $note-priority-low;
-        }
-        .timestamp {
-            font-size: 12px;
-            font-weight: 500;
-            color: rgb(146, 146, 146);
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            z-index: 2;
-        }
+    .priority {
+        position: absolute;
+        top: 190px;
+        left: 0px;
+        z-index: 3;
+    }
+    .timestamp {
+        font-size: 12px;
+        font-weight: 500;
+        color: rgb(146, 146, 146);
+        position: absolute;
+        top: 220px;
+        right: 10px;
+        z-index: 2;
     }
 }
 
