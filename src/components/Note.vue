@@ -5,7 +5,7 @@
         .holder
             .priorities
                 priorities
-            <!-- check priority level and assign class accordingly for css color -->
+            // check priority level and assign class accordingly for css color
             .priority(:class="{
 					'low': note.priorityLevel == 0,
 					'medium': note.priorityLevel == 1,
