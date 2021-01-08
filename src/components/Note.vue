@@ -10,7 +10,7 @@
 		>
 		</div>
 		<apexchart v-else class="priority-multiple-notes" type="donut" width="90" :options="chartOptions" :series="chartData"></apexchart>
-		<div class="note-count"> {{ notes.length }} </div>
+		<div v-if="!hasOnlyOneNote" class="note-count"> {{ notes.length }} Notes </div>
 		<div class="timestamp">{{ topNote.date_posted[1] | formatTime }}</div>
 	</div>
 <!-- - .note-container
@@ -116,13 +116,13 @@ export default {
 	}
 	.priority-one-note {
 		position: absolute;
-		bottom: 35px;
-		right: 0;
+		top: 200px;
+		left: 0;
 		z-index: 3;
 		height: 20px;
 		width: 80px;
-		border-top-left-radius: 10px;
-		border-bottom-left-radius: 10px;
+		border-top-right-radius: 10px;
+		border-bottom-right-radius: 10px;
 	}
 	.high {
 		background-color: $note-priority-high;
@@ -140,13 +140,15 @@ export default {
 		z-index: 3;
 	}
 	.note-count {
-		font-size: 12px;
-		font-weight: 500;
+		font-size: 14px;
+		font-weight: 600;
 		color: rgb(146, 146, 146);
 		position: absolute;
-		top: 220px;
-		right: 10px;
+		top: 185px;
+		right: 0px;
 		z-index: 3;
+		background-color: lightgrey;
+		padding: 0rem 0.5rem;
 	}
 	.timestamp {
 		font-size: 12px;
