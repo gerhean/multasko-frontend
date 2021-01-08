@@ -1,4 +1,11 @@
-// import Axios from 'axios';
+import axios from 'axios';
+
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+const MEMO_URL = "https://multasko-backend.herokuapp.com/api/memo";
+const CATEGORY_URL = "https://multasko-backend.herokuapp.com/api/category";
+// let lastMemoTime = 1610087437;
 
 let multaskoHomeData = {
 	data: [
@@ -84,7 +91,7 @@ let multaskoHomeData = {
 let multaskoCategoriesData = {
 	data: [
 		{
-			category: 'Sports',
+			name: 'Dancing',
 			memos: [
 				[
 					{
@@ -123,7 +130,7 @@ let multaskoCategoriesData = {
 			],
 		},
 		{
-			category: 'music',
+			name: 'Singing',
 			memos: [
 				[
 					{
@@ -166,23 +173,82 @@ let multaskoListOfCategories = [
 	"empty",
 ];
 
-export function initHomeData() {
-	// call backend
-}
-
-export function initCategoriesData() {
-	// call backend
-	populateListOfCategories();
-}
-
 function populateListOfCategories() {
 	multaskoListOfCategories.length = 0; // clear array
 	for (const item of multaskoCategoriesData.data) {
-		multaskoListOfCategories.push(item.category);
+		multaskoListOfCategories.push(item.name);
 	}
 }
 
-populateListOfCategories();
+function hmsToSeconds(hms) {
+	const a = hms.split(':'); // split it at the colons
+	// minutes are worth 60 seconds. Hours are worth 60 minutes.
+	return (+a[0]) * 3600 + (+a[1]) * 60 + (+a[2]); 
+}
+
+function dateToString(dateStr) {
+	const a = dateStr.split('-'); // split it at the colons
+	if(a[2][0] == "0") {
+		a[2] = a[2][1];
+	}
+	// minutes are worth 60 seconds. Hours are worth 60 minutes.
+	return monthNames[+a[1] - 1] + " " + a[2]; 
+}
+
+export async function initHomeData() {
+	const response = await axios ({
+		url: MEMO_URL,
+		method: "GET"
+	});
+
+	const memos = response.data.memos;
+	let curDate = memos[0].date_posted[0];
+	let curTime = hmsToSeconds(memos[0].date_posted[1]);
+	const homeData = [];
+	let dayGroup = [];
+	let timeBoxGroup = [];
+	for(const memo of memos) {
+		const seconds = hmsToSeconds(memo.date_posted[1]);
+		if (memo.date_posted[0] != curDate) {
+			dayGroup.push(timeBoxGroup);
+			homeData.push({
+				date: dateToString(curDate),
+				memos: dayGroup,
+			})
+			dayGroup = [];
+			timeBoxGroup = [];
+		} else if (curTime - seconds > 300) {
+			dayGroup.push(timeBoxGroup);
+			timeBoxGroup = [];
+		}
+		curTime = seconds;
+		timeBoxGroup.push({
+			text: memo.text,
+			priority_level: memo.priority_level,
+			date_posted: memo.date_posted
+		});
+	}
+
+	dayGroup.push(timeBoxGroup);
+	homeData.push({
+		date: dateToString(curDate),
+		memos: dayGroup,
+	});
+
+	multaskoHomeData.data = homeData;
+}
+
+export async function initCategoriesData() {
+	const response = await axios ({
+		url: CATEGORY_URL,
+		method: "GET"
+	});
+	multaskoCategoriesData.data = response.data.categories;
+
+	populateListOfCategories();
+}
+
+populateListOfCategories(); // remove after API function is completed
 
 const service = {
 	multaskoHomeData: multaskoHomeData,
