@@ -7,7 +7,7 @@
             >
                 <span class="tag is-dark is-rounded is-large"> 
                     {{ category }}
-                    <i class="mdi mdi-16px mdi-close" style="margin-left: 0.5rem" @click="deleteCategory(category)"/> 
+                    <i class="mdi mdi-16px mdi-close" style="margin-left: 0.5rem" @click="confirmDeleteCategory(category)"/> 
                 </span>
             </div>
             <span class="tag is-info is-rounded is-large category-tag add-category" @click="openAddCategory"> 
@@ -80,6 +80,12 @@ export default {
       },
       deleteCategory(category) {
           console.log(category);
+      },
+      confirmDeleteCategory(category) {
+          this.$buefy.dialog.confirm({
+              message: 'Are you sure you want to delete this category?',
+              onConfirm: () => this.deleteCategory(category), 
+          })
       },
   },
 }
