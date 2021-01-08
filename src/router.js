@@ -6,6 +6,7 @@ Vue.use(Router);
 import Render from './views/Render.vue';
 import Categories from './views/Categories.vue';
 import Home from './views/Home.vue';
+import UnderConstruction from './views/UnderConstruction.vue';
 
 // import { initData } from './services/initData';
 
@@ -27,19 +28,19 @@ const router = new Router({
 				},
 				{
 					path: 'calendar',
-					component: Home,
+					component: UnderConstruction,
 				},
 				{
 					path: 'transfer',
-					component: Home,
+					component: UnderConstruction,
 				},
 				{
 					path: 'analytics',
-					component: Home,
+					component: UnderConstruction,
 				},
 				{
 					path: 'settings',
-					component: Home,
+					component: UnderConstruction,
 				},
 			],
 		},

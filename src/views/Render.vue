@@ -84,7 +84,7 @@
             />
         </transition>
 
-        <i class="add-memo mdi mdi-36px mdi-plus-circle-outline" @click="openAddMemo"/>
+        <i v-if="selectedOption == 'home' || selectedOption == 'categories'" class="add-memo mdi mdi-36px mdi-plus-circle-outline" @click="openAddMemo"/>
 
         <transition name="add-memo-panel-transition">
             <div v-if="isAddingMemo" class="add-memo-panel modal is-active">
