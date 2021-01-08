@@ -6,7 +6,6 @@ import moment from 'moment';
 
 const filters = { 
 	formatTime(time) {
-		console.log('jre');
 		return moment(time, 'HH mm ss').format('LT');
 	},
 	formatDate(date) {

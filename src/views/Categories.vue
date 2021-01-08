@@ -19,6 +19,7 @@
             :data="data"
             :isCategories="true"
             :key="idx"
+            @viewnote="emitOpenNoteViewerCategories"
         />
 
         <transition name="add-category-panel-transition">
@@ -67,6 +68,10 @@ export default {
       }
   },
   methods: {
+      emitOpenNoteViewerCategories(data) {
+        console.log('emit categories open note viewer');
+        this.$emit('viewnote', data); 
+      },
       postCategory() {
           console.log(this.addCategoryName);
           this.closeAddCategory();

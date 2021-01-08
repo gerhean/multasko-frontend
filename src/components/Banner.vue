@@ -1,12 +1,16 @@
-<template lang="pug">
-    .banner
-        .date(v-on:click=toggleBanner) {{ isCategories ? data.name : data.date }}
-        .border-line
-        .holder(v-if="isBannerOpen")
-            Note(v-for="(noteGroup, idx) in data.memos"
+<template>
+    <div class="banner">
+        <div class="date">{{ isCategories ? data.name : data.date }}</div>
+        <div class="border-line"></div>
+        <div class="holder" v-if="isBannerOpen">
+            <Note v-for="(noteGroup, idx) in data.memos" 
                 :notes="noteGroup"
+                :isView="false"
                 :key="idx"
-            )
+                @viewnote="emitOpenNoteViewerBanner"
+            />
+        </div>
+    </div>
 </template>
 
 <script>
@@ -32,7 +36,11 @@ export default {
   methods: {
     toggleBanner() {
       this.isBannerOpen = !this.isBannerOpen;
-    }
+    },
+    emitOpenNoteViewerBanner(data) {
+        console.log('emit banner open note view');
+        this.$emit('viewnote', data);
+    },
   },
 }
 </script>
