@@ -348,7 +348,8 @@ export async function postMemo(text, priority_level) {
 }
 
 export async function postCategory(categoryNames) {
-  axios.post(CATEGORY_URL, categoryNames.map((name) => ({ "name": name })));
+  const response = await axios.post(CATEGORY_URL, categoryNames.map((name) => ({ "name": name })));
+  multaskoCategoriesData.data.push(...response.data)
 }
 
 export async function putDatabaseMemo(id, text, priority_level) {
@@ -360,11 +361,11 @@ export async function putDatabaseCategory(id, name) {
 }
 
 export async function deleteDatabaseMemo(id) {
-  axios.delete(MEMO_URL, id);
+  axios.delete(MEMO_URL + `?id=${id}`);
 }
 
 export async function deleteDatabaseCategory(id) {
-  axios.delete(CATEGORY_URL, id);
+  axios.delete(CATEGORY_URL + `?id=${id}`);
   // multaskoCategoriesData.data = multaskoCategoriesData.data.filter(item => item.id !== id);
 }
 
@@ -372,7 +373,6 @@ export function searchMemo(query) {
   const result = bulkSearch.search(query);
   const resultMemos = result.map((id) => memoMap[id]);
   resultMemos.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
-  console.dir(resultMemos);
   if (resultMemos.length == 0) {
     return [];
   }
@@ -387,6 +387,8 @@ const service = {
   multaskoListOfCategories: multaskoListOfCategories, 
   searchMemo: searchMemo,
   postMemo: postMemo,
+  postCategory: postCategory,
+  deleteDatabaseCategory: deleteDatabaseCategory,
 }
 
 // putMemo("a test message", 1);

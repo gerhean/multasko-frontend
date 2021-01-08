@@ -2,12 +2,12 @@
     <div class="categories">
         <div class="list-of-categories">
             <div class="category-tag" 
-                v-for="(category, idx) in multaskoListOfCategories"
-                :key="idx"
+                v-for="(category, index) in multaskoCategoriesData.data"
+                :key="category.id"
             >
                 <span class="tag is-dark is-rounded is-large"> 
-                    {{ category }}
-                    <i class="mdi mdi-16px mdi-close" style="margin-left: 0.5rem" @click="confirmDeleteCategory(category)"/> 
+                    {{ category.name }}
+                    <i class="mdi mdi-16px mdi-close" style="margin-left: 0.5rem" @click="confirmDeleteCategory(category, index)"/> 
                 </span>
             </div>
             <span class="tag is-info is-rounded is-large category-tag add-category" @click="openAddCategory"> 
@@ -53,6 +53,7 @@
 <script>
 import Banner from '../components/Banner.vue';
 import service from '../services/initData';
+import { postCategory, deleteDatabaseCategory } from '../services/initData';
 
 export default {
   name: 'Categories',
@@ -73,7 +74,7 @@ export default {
         this.$emit('viewnote', data); 
       },
       postCategory() {
-          console.log(this.addCategoryName);
+          postCategory(this.addCategoryName.split(","));
           this.closeAddCategory();
       },
       openAddCategory() {
@@ -83,17 +84,18 @@ export default {
           this.addCategoryContent = '';
           this.isAddingCategory = false;
       },
-      deleteCategory(category) {
-          console.log(category);
+      deleteCategory(category, index) {
+          this.multaskoCategoriesData.data.splice(index, 1)
+          deleteDatabaseCategory(category.id);
       },
-      confirmDeleteCategory(category) {
+      confirmDeleteCategory(category, index) {
           this.$buefy.dialog.confirm({
-                title: `Deleting "${category}" category`,
+                title: `Deleting "${category.name}" category`,
                 message: 'Are you sure you want proceed?\n This action cannot be undone.',
                 confirmText: 'Delete',
                 type: 'is-danger',
                 hasIcon: true,
-                onConfirm: () => this.deleteCategory(category), 
+                onConfirm: () => this.deleteCategory(category, index), 
           })
       },
   },

@@ -202,8 +202,7 @@ export default {
           this.closeAddMemo();
       },
       addAnotherMemo() {
-          console.log(this.addMemoContent);
-          console.log(this.selectedNotePriority);
+          postMemo(this.addMemoContent, this.selectedNotePriority);
           this.selectedNotePriority = 0;
           this.addMemoContent = '';
       },
