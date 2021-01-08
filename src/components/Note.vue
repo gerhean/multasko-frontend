@@ -1,30 +1,38 @@
 <template>
-    <div class="note" :class="{'normal-note': !isView, 'view-note': isView}" @click="emitOpenNoteViewerNote">
-        <div class="note-content">
-            {{ topNote.text }}
+    <div class="wrapper">
+
+        <div class="note" :class="{'normal-note': !isView, 'view-note': isView}" @click="emitOpenNoteViewerNote">
+            <div class="note-content">
+                {{ topNote.text }}
+            </div>
+            <div v-if="hasOnlyOneNote" class="priority-one-note" 
+                :class="{
+                    'low': topNote.priority_level == 0,
+                    'medium': topNote.priority_level == 1,
+                    'high': topNote.priority_level == 2,
+                }"
+            >
+            </div>
+            <apexchart v-else class="priority-multiple-notes" type="donut" width="90" :options="chartOptions" :series="chartData"></apexchart>
+            <div class="note-count-wrapper">
+                <div v-if="!hasOnlyOneNote" class="note-count"> {{ notes.length }} Notes </div>
+            </div>
+            <div class="timestamp">{{ topNote.date_posted[1] | formatTime }}</div>
         </div>
-        <div v-if="hasOnlyOneNote" class="priority-one-note" 
-            :class="{
-                'low': topNote.priority_level == 0,
-                'medium': topNote.priority_level == 1,
-                'high': topNote.priority_level == 2,
-            }"
-        >
+
+        <!-- hacky memo stack implementation -->
+        <div v-for="(pad,index) in getStackNum" :key="`pad-${index}`" style="position:absolute;top:0">
+            <div class="note" v-bind:style="{top: pad[0],zIndex:pad[1]}">
+            </div>
         </div>
-        <apexchart v-else class="priority-multiple-notes" type="donut" width="90" :options="chartOptions" :series="chartData"></apexchart>
-        <div class="note-count-wrapper">
-            <div v-if="!hasOnlyOneNote" class="note-count"> {{ notes.length }} Notes </div>
-        </div>
-        <div class="timestamp">{{ topNote.date_posted[1] | formatTime }}</div>
+
+    </div>
 
 <!-- - .note-container
 -   // https://stackoverflow.com/questions/7324722/cut-corners-using-css 
 -   .note-stack.note-stack-one
 -     .corner -->
 
-
-
-    </div>
 </template>
 
 <script>
@@ -101,10 +109,18 @@ export default {
       }
       return data;
     },
+	getStackNum: function() {
+        let toRet = []
+            let offset = 10
+            for(let i = 1; i < this.notes.length && i < 3; i += 1){
+                toRet.push([(offset * i).toString() + "px", -i])
+            }
+            return toRet
+	},
   },
   methods: {
       emitOpenNoteViewerNote() {
-          console.log('emit note open');
+        //   console.log('emit note open');
           this.$emit('viewnote', this.notes);
       },
   },
@@ -114,6 +130,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "../styles/mixin.scss";
+
+.wrapper {
+    position: relative;
+}
 
 .normal-note {
     overflow: hidden;
@@ -133,12 +153,23 @@ export default {
     background-color: $note-color;
     width: 250px;
     height: 250px;
+
+    background:
+        linear-gradient(45deg, transparent 50%, $note-color-dark 50%),
+        linear-gradient(45deg, $note-color, $note-color),
+        linear-gradient(135deg, $note-color, $note-color),
+        linear-gradient(45deg, transparent 11px, $note-color 10px);
+    background-size: 15px 15px, 0 0, 0 0, 100% 100%;
+    background-position: 0 100%, 0 0, 100% 100%, 100% 0;
+    background-repeat: no-repeat;
+	filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.21)) drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.11));
+
     padding: 1rem;
     margin-top: 2rem;
     margin-right: 2rem;
     // overflow: hidden;
     border-radius: 12px 12px 12px 0px;
-    z-index: 0;
+    z-index: 1;
     opacity: 0.9;
     .note-content {
         font-size: 14px;
@@ -204,36 +235,36 @@ export default {
     opacity: 1;
 }
 
-.note-stack {
-    width: 250px;
-    height: 30px;
-    background-color: $note-color;
-    border-radius: 12px 12px 12px 0px;
-    z-index: 1;
-    .corner {
-        position: absolute;
-        bottom: 100;
-        left: 0;
-        border-width: 0 16px 16px 0;
-        border-style: solid;
-        border-color: white $note-color-dark; 
-    }
-}
+// .note-stack {
+//     width: 250px;
+//     height: 30px;
+//     background-color: $note-color;
+//     border-radius: 12px 12px 12px 0px;
+//     z-index: 1;
+//     .corner {
+//         position: absolute;
+//         bottom: 100;
+//         left: 0;
+//         border-width: 0 16px 16px 0;
+//         border-style: solid;
+//         border-color: white $note-color-dark; 
+//     }
+// }
+// note-stack-one {
+//     position: absolute;
+//     top: 280px;
+// }
 
-note-stack-one {
-    position: absolute;
-    top: 280px;
-}
-
-.note:before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-width: 0 16px 16px 0;
-    border-style: solid;
-    border-color: white $note-color-dark; 
-}
+// old memo bottom left fold
+// .note:before {
+//     content: "";
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+//     border-width: 0 16px 16px 0;
+//     border-style: solid;
+//     border-color: white $note-color-dark; 
+// }
 
 .normal-note::after {
     display: flex;

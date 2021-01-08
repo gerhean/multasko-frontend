@@ -85,7 +85,7 @@
             />
         </transition>
 
-        <i class="add-memo mdi mdi-36px mdi-plus-circle-outline" @click="openAddMemo"/>
+        <i v-if="selectedOption == 'home' || selectedOption == 'categories'" class="add-memo mdi mdi-36px mdi-plus-circle-outline" @click="openAddMemo"/>
 
         <transition name="add-memo-panel-transition">
             <div v-if="isAddingMemo" class="add-memo-panel modal is-active">
@@ -182,15 +182,14 @@ export default {
         }
       },
       openNoteViewer(data) {
-          console.log(data);
-          console.log('openNoteViewerRender')
+        //   console.log('openNoteViewerRender')
           this.notesToView.length = 0; // clear array
           for (const note of data) {
               const arr = [];
               arr.push(note);
               this.notesToView.push(arr);
           }
-          console.log(this.notesToView);
+        //   console.log(this.notesToView);
           this.$nextTick(() => {
             this.isViewingNotes = true;
           });
