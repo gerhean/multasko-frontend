@@ -1,9 +1,12 @@
 <template lang="pug">
-.note
-    .note-content {{ topNote.content }}
-    apexchart.priority(type="donut", width="90",
-        :options="chartOptions", :series="chartData")
-    .timestamp {{ topNote.timestamp }}
+.note-container
+    .note
+        .note-content {{ topNote.content }}
+        apexchart.priority(type="donut", width="90",
+            :options="chartOptions", :series="chartData")
+        .timestamp {{ topNote.timestamp }}
+    .note-stack.note-stack-one
+      .corner
 </template>
 
 <script>
@@ -77,8 +80,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "../styles/mixin.scss";
+.note-container{
+  position: relative;
+  width: 250px;
+  height: 250px;
 
-.note {
+  .note {
     position: relative;
     width: 250px;
     height: 250px;
@@ -88,6 +95,9 @@ export default {
     margin-right: 2rem;
     overflow: hidden;
     border-radius: 12px 12px 12px 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 1;
+
     .note-content {
         font-size: 14px;
         text-align: justify;
@@ -106,8 +116,29 @@ export default {
         position: absolute;
         top: 220px;
         right: 10px;
-        z-index: 2;
+        z-index: 3;
+    }   
+  }
+  .note-stack {
+    width: 250px;
+    height: 30px;
+    background-color: $note-color;
+    border-radius: 12px 12px 12px 0px;
+    z-index: 1;
+    .corner {
+      position: absolute;
+      bottom: 100;
+      left: 0;
+      border-width: 0 16px 16px 0;
+      border-style: solid;
+      border-color: white $note-color-dark; 
     }
+  }
+  
+  note-stack-one {
+    position: absolute;
+    top: 280px;
+  }
 }
 
 .note:before {
@@ -117,7 +148,7 @@ export default {
     left: 0;
     border-width: 0 16px 16px 0;
     border-style: solid;
-    border-color: white $note-color-dark; 
+    border-color: transparent $note-color-dark; 
 }
 
 .note::after {
