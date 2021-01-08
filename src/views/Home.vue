@@ -1,7 +1,8 @@
 <template>
     <div class="home">
-        <Banner v-for="(data, idx) in multaskoData.data"
+        <Banner v-for="(data, idx) in multaskoHomeData.data"
             :data="data"
+            :isCategories="false"
             :key="idx"
         />
     </div>
@@ -9,7 +10,7 @@
 
 <script>
 import Banner from '../components/Banner.vue';
-import multaskoData from '../services/initData'; 
+import service from '../services/initData'; 
 
 export default {
   name: 'Home',
@@ -18,7 +19,7 @@ export default {
   },
   data() {
       return {
-          multaskoData: multaskoData,
+          multaskoHomeData: service.multaskoHomeData,
       }
   },
 }

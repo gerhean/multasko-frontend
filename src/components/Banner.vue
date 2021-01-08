@@ -1,6 +1,6 @@
 <template lang="pug">
     .banner
-        .date(v-on:click=toggleBanner) {{ data.date }}
+        .date(v-on:click=toggleBanner) {{ isCategories ? data.category : data.date }}
         .border-line
         .holder(v-if="isBannerOpen")
             Note(v-for="(noteGroup, idx) in data.memos"
@@ -26,6 +26,7 @@ export default {
 
   props: {
       data: Object, 
+      isCategories: Boolean,
   },
 
   methods: {

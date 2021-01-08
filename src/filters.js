@@ -14,11 +14,4 @@ const filters = {
 	}
 }
 
-//formatDate = (date) => moment(time, 'HH mm ss').format('LT');
-
-// const filters = {
-// 	formatTime: formatTime,
-// 	formatDate: formatDate,
-// }
-
 export default filters;

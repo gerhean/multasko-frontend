@@ -16,48 +16,60 @@
             </div>
             <aside class="menu">
                 <ul class="menu-list">
-                    <router-link to="/">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-home"></i>
-                            &nbsp;
-                            <span>Home</span>
-                        </a></li>
-                    </router-link>
-                    <router-link to="/categories">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-folder"></i>
-                            &nbsp;
-                            <span>Categories</span>
-                        </a></li>
-                    </router-link>
-                    <router-link to="/calendar">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-calendar"></i>
-                            &nbsp;
-                            <span>Calendar</span>
-                        </a></li>
-                    </router-link>
-                    <router-link to="/transfer">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-swap-horizontal"></i>
-                            &nbsp;
-                            <span>Transfer</span>
-                        </a></li>
-                    </router-link>
-                    <router-link to="/analytics">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-google-analytics"></i>
-                            &nbsp;
-                            <span>Analytics</span>
-                        </a></li>
-                    </router-link>
-                    <router-link to="/settings">
-                        <li><a>
-                            <i class="mdi mdi-24px mdi-cogs"></i>
-                            &nbsp;
-                            <span>Settings</span>
-                        </a></li>
-                    </router-link>
+                    <div :class="{'is-active-view': selectedOption == 'home'}" @click="selectedOption = 'home'">
+                        <router-link to="/">
+                            <li><a>
+                                <i class="mdi mdi-24px mdi-home"></i>
+                                &nbsp;
+                                <span>Home</span>
+                            </a></li>
+                        </router-link>
+                    </div>
+                    <div :class="{'is-active-view': selectedOption == 'categories'}" @click="selectedOption = 'categories'">
+                        <router-link to="/categories">
+                            <li><a>
+                                <i class="mdi mdi-24px mdi-folder"></i>
+                                &nbsp;
+                                <span>Categories</span>
+                            </a></li>
+                        </router-link>
+                    </div>
+                    <div :class="{'is-active-view': selectedOption == 'calendar'}" @click="selectedOption = 'calendar'">
+                        <router-link to="/calendar">
+                            <li><a>
+                                <i class="mdi mdi-24px mdi-calendar"></i>
+                                &nbsp;
+                                <span>Calendar</span>
+                            </a></li>
+                        </router-link>
+                    </div>
+                   <div :class="{'is-active-view': selectedOption == 'transfer'}" @click="selectedOption = 'transfer'"> 
+                        <router-link to="/transfer">
+                            <li><a>
+                                <i class="mdi mdi-24px mdi-swap-horizontal"></i>
+                                &nbsp;
+                                <span>Transfer</span>
+                            </a></li>
+                        </router-link>
+                    </div>
+                    <div :class="{'is-active-view': selectedOption == 'analytics'}" @click="selectedOption = 'analytics'"> 
+                        <router-link to="/analytics">
+                            <li><a>
+                                <i class="mdi mdi-24px mdi-google-analytics"></i>
+                                &nbsp;
+                                <span>Analytics</span>
+                            </a></li>
+                        </router-link>
+                    </div>
+                    <div :class="{'is-active-view': selectedOption == 'settings'}" @click="selectedOption = 'settings'"> 
+                        <router-link to="/settings">
+                            <li><a>
+                                <i class="mdi mdi-24px mdi-cogs"></i>
+                                &nbsp;
+                                <span>Settings</span>
+                            </a></li>
+                        </router-link>
+                    </div>
                 </ul>
             </aside>
         </div>
@@ -118,6 +130,7 @@ export default {
           isAddingMemo: false,
           addMemoContent: '',
           selectedNotePriority: 0,
+          selectedOption: 'home',
       }
   },
   methods: {
@@ -155,6 +168,10 @@ export default {
 .layout {
     display: flex;
     position: relative;
+}
+
+.is-active-view {
+    background-color: $side-panel-bg-dark-color;
 }
 
 .side-panel {
