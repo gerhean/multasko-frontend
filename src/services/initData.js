@@ -184,8 +184,7 @@ function dateToString(dateStr) {
 	return monthNames[+a[1] - 1] + " " + a[2]; 
 }
 
-export async function init() {
-	// call backend
+export async function initHomeData() {
 	const response = await axios ({
 		url: MEMO_URL,
 		method: "GET"
@@ -228,10 +227,13 @@ export async function init() {
 	multaskoHomeData.data = homeData;
 }
 
+export function initCategoriesData() {
+
+}
+
 const service = {
 	multaskoHomeData: multaskoHomeData,
 	multaskoCategoriesData: multaskoCategoriesData,
 }
 
-init();
 export default service;
