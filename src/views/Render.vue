@@ -79,7 +79,9 @@
         </div>
 
         <transition appear name="change-view-transition">
-            <router-view/>
+            <router-view
+                @viewnote="openNoteViewer"
+            />
         </transition>
 
         <i class="add-memo mdi mdi-36px mdi-plus-circle-outline" @click="openAddMemo"/>
@@ -123,24 +125,71 @@
                 </div>
             </div>
         </transition>
+
+        <!-- note viewer uses same transition as add memo -->
+        <transition name="add-memo-panel-transition">
+            <div v-if="isViewingNotes" class="note-viewer-panel modal is-active">
+                <div class="modal-background" @click="closeNoteViewer"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title"> {{ title }} </p>
+                        <button class="delete" aria-label="close" @click="closeNoteViewer"></button>
+                    </header>
+                    <section class="modal-card-body notes">
+                        <Note v-for="(note, idx) in notesToView" 
+                            :notes="note"
+                            :isView="true"
+                            :key="idx"
+                        />
+                    </section>
+                    <footer class="modal-card-foot">
+                    </footer>
+                </div>
+            </div>
+        </transition>
+
     </div>
 </template>
 
 <script>
 // import axios from 'axios';
+import Note from '../components/Note.vue';
 
 export default {
   name: 'Render',
+  components: {
+      Note,
+  },
   data() {
       return {
+          isViewingNotes: false,
           isAddingMemo: false,
           addMemoContent: '',
           selectedNotePriority: 1,
           selectedOption: 'home',
           username: 'John Doe',
+          notesToView: [],
+          title: '',
       }
   },
   methods: {
+      openNoteViewer(data) {
+          console.log(data);
+          console.log('openNoteViewerRender')
+          this.notesToView.length = 0; // clear array
+          for (const note of data) {
+              const arr = [];
+              arr.push(note);
+              this.notesToView.push(arr);
+          }
+          console.log(this.notesToView);
+          this.$nextTick(() => {
+            this.isViewingNotes = true;
+          });
+      },
+      closeNoteViewer() {
+          this.isViewingNotes = false;
+      },
       postMemo() {
           console.log(this.addMemoContent);
           console.log(this.selectedNotePriority);
@@ -265,6 +314,16 @@ export default {
     }
     textarea:focus {
         outline: none;
+    }
+}
+
+.note-viewer-panel {
+    .modal-card {
+        width: 1000px;
+        .notes {
+            display: flex;
+            flex-wrap: wrap;
+        }
     }
 }
 

@@ -4,6 +4,7 @@
             :data="data"
             :isCategories="false"
             :key="idx"
+            @viewnote="emitOpenNoteViewerHome"
         />
     </div>
 </template>
@@ -20,6 +21,12 @@ export default {
   data() {
       return {
           multaskoHomeData: service.multaskoHomeData,
+      }
+  },
+  methods: {
+      emitOpenNoteViewerHome(data) {
+          console.log('emit home open note viewer');
+          this.$emit('viewnote', data);
       }
   },
 }
