@@ -335,6 +335,7 @@ export async function postMemo(text, priority_level) {
 
 export async function postCategory(categoryNames) {
   const response = await axios.post(CATEGORY_URL, categoryNames.map((name) => ({ "name": name })));
+  console.log(response);
 }
 
 export async function putDatabaseMemo(id, text, priority_level) {

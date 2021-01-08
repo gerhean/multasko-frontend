@@ -318,9 +318,12 @@ export default {
 }
 
 .note-viewer-panel {
-    .notes {
-        display: flex;
-        flex-wrap: wrap;
+    .modal-card {
+        width: 1000px;
+        .notes {
+            display: flex;
+            flex-wrap: wrap;
+        }
     }
 }
 
