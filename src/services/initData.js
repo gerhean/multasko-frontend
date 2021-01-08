@@ -117,6 +117,7 @@ let multaskoHomeData = {
 let multaskoCategoriesData = {
 	data: [
 		{
+			id: -1,
 			name: 'Dancing',
 			memos: [
 				[
@@ -162,6 +163,7 @@ let multaskoCategoriesData = {
 			],
 		},
 		{
+			id: -2,
 			name: 'Singing',
 			memos: [
 				[
@@ -208,109 +210,107 @@ let multaskoCategoriesData = {
 };
 
 let multaskoListOfCategories = [
-	"empty",
+  "empty",
 ];
 
 function populateListOfCategories() {
-	multaskoListOfCategories.length = 0; // clear array
-	for (const item of multaskoCategoriesData.data) {
-		multaskoListOfCategories.push(item.name);
-	}
+  multaskoListOfCategories.length = 0; // clear array
+  for (const item of multaskoCategoriesData.data) {
+    multaskoListOfCategories.push(item.name);
+  }
 }
 
 function hmsToSeconds(hms) {
-	const a = hms.split(':'); // split it at the colons
-	// minutes are worth 60 seconds. Hours are worth 60 minutes.
-	return (+a[0]) * 3600 + (+a[1]) * 60 + (+a[2]); 
+  const a = hms.split(':'); // split it at the colons
+  // minutes are worth 60 seconds. Hours are worth 60 minutes.
+  return (+a[0]) * 3600 + (+a[1]) * 60 + (+a[2]); 
 }
 
 function dateToString(dateStr) {
-	const a = dateStr.split('-'); // split it at the colons
-	if(a[2][0] == "0") {
-		a[2] = a[2][1];
-	}
-	// minutes are worth 60 seconds. Hours are worth 60 minutes.
-	return monthNames[+a[1] - 1] + " " + a[2]; 
+  const a = dateStr.split('-'); // split it at the colons
+  if(a[2][0] == "0") {
+    a[2] = a[2][1];
+  }
+  // minutes are worth 60 seconds. Hours are worth 60 minutes.
+  return monthNames[+a[1] - 1] + " " + a[2]; 
 }
 
 export async function initHomeData() {
-	const response = await axios ({
-		url: MEMO_URL,
-		method: "GET"
-	});
+  const response = await axios.get(MEMO_URL);
 
-	const memos = response.data.memos;
-	let curDate = memos[0].date_posted[0];
-	let curTime = hmsToSeconds(memos[0].date_posted[1]);
-	const homeData = [];
-	let dayGroup = [];
-	let timeBoxGroup = [];
-	for(const memo of memos) {
-		const seconds = hmsToSeconds(memo.date_posted[1]);
-		if (memo.date_posted[0] != curDate) {
-			timeBoxGroup.reverse();
-			dayGroup.push(timeBoxGroup);
-			homeData.push({
-				date: dateToString(curDate),
-				memos: dayGroup,
-			})
-			dayGroup = [];
-			timeBoxGroup = [];
-		} else if (curTime - seconds > 300) {
-			timeBoxGroup.reverse();
-			dayGroup.push(timeBoxGroup);
-			timeBoxGroup = [];
-		}
-		curTime = seconds;
-		timeBoxGroup.push(memo);
-	}
+  const memos = response.data.memos;
+  let curDate = memos[0].date_posted[0];
+  let curTime = hmsToSeconds(memos[0].date_posted[1]);
+  const homeData = [];
+  let dayGroup = [];
+  let timeBoxGroup = [];
+  for(const memo of memos) {
+    const seconds = hmsToSeconds(memo.date_posted[1]);
+    if (memo.date_posted[0] != curDate) {
+      timeBoxGroup.reverse();
+      dayGroup.push(timeBoxGroup);
+      homeData.push({
+        date: dateToString(curDate),
+        memos: dayGroup,
+      })
+      dayGroup = [];
+      timeBoxGroup = [];
+    } else if (curTime - seconds > 300) {
+      timeBoxGroup.reverse();
+      dayGroup.push(timeBoxGroup);
+      timeBoxGroup = [];
+    }
+    curTime = seconds;
+    timeBoxGroup.push(memo);
+  }
 
-	dayGroup.push(timeBoxGroup);
-	homeData.push({
-		date: dateToString(curDate),
-		memos: dayGroup,
-	});
+  dayGroup.push(timeBoxGroup);
+  homeData.push({
+    date: dateToString(curDate),
+    memos: dayGroup,
+  });
 
-	multaskoHomeData.data = homeData;
+  multaskoHomeData.data = homeData;
 }
 
 export async function initCategoriesData() {
-	const response = await axios ({
-		url: CATEGORY_URL,
-		method: "GET"
-	});
-	multaskoCategoriesData.data = response.data.categories;
+  const response = await axios.get(CATEGORY_URL);
+  multaskoCategoriesData.data = response.data.categories;
 
-	populateListOfCategories();
+  populateListOfCategories();
 }
 
 export async function postMemo(text, priority_level) {
-	const response = await axios.post(MEMO_URL, 
-		{"text": text, "priority_level": priority_level});
-	const newMemo = response.data;
-	const lastPostedDate = multaskoHomeData.data[0].memos[0][0].date_posted;
-	if (newMemo.date_posted[0] != lastPostedDate[0]) {
-		multaskoHomeData.data.unshift({
-			date: dateToString(newMemo.date_posted[0]),
-			memos: [[newMemo]],
-		})
-	} else if (hmsToSeconds(newMemo.date_posted[1]) - hmsToSeconds(lastPostedDate[1]) > 300) {
-		multaskoHomeData.data[0].memos.unshift([newMemo]);
-	} else {
-		multaskoHomeData.data[0].memos[0].push(newMemo);
-	}
+  const response = await axios.post(MEMO_URL, 
+    {"text": text, "priority_level": priority_level});
+  const newMemo = response.data;
+  const lastPostedDate = multaskoHomeData.data[0].memos[0][0].date_posted;
+  if (newMemo.date_posted[0] != lastPostedDate[0]) {
+    multaskoHomeData.data.unshift({
+      date: dateToString(newMemo.date_posted[0]),
+      memos: [[newMemo]],
+    })
+  } else if (hmsToSeconds(newMemo.date_posted[1]) - hmsToSeconds(lastPostedDate[1]) > 300) {
+    multaskoHomeData.data[0].memos.unshift([newMemo]);
+  } else {
+    multaskoHomeData.data[0].memos[0].push(newMemo);
+  }
 }
 
 export async function postCategory(categoryNames) {
-	axios.post(MEMO_URL, categoryNames.map((name) => ({ "name": name })));
+  axios.post(CATEGORY_URL, categoryNames.map((name) => ({ "name": name })));
+}
+
+export async function deleteCategory(id) {
+  axios.delete(CATEGORY_URL, id);
+  multaskoCategoriesData.data = multaskoCategoriesData.data.filter(item => item.id !== id);
 }
 
 populateListOfCategories(); // remove after API function is completed
-
 const service = {
-	multaskoHomeData: multaskoHomeData,
-	multaskoCategoriesData: multaskoCategoriesData,
-	multaskoListOfCategories: multaskoListOfCategories, 
+  multaskoHomeData: multaskoHomeData,
+  multaskoCategoriesData: multaskoCategoriesData,
+  multaskoListOfCategories: multaskoListOfCategories, 
 }
 
 // putMemo("a test message", 1);

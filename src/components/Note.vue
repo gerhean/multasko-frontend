@@ -1,15 +1,16 @@
 <template>
 	<div class="note">
 		<div class="note-content">{{ topNote.text }}</div>
-			<div v-if="hasOnlyOneNote" class="priority-one-note" 
-				:class="{
-					'low': topNote.priority_level == 0,
-					'medium': topNote.priority_level == 1,
-					'high': topNote.priority_level == 2,
-				}"
-			>
-			</div>
-			<apexchart v-else class="priority-multiple-notes" type="donut" width="90" :options="chartOptions" :series="chartData"></apexchart>
+		<div v-if="hasOnlyOneNote" class="priority-one-note" 
+			:class="{
+				'low': topNote.priority_level == 0,
+				'medium': topNote.priority_level == 1,
+				'high': topNote.priority_level == 2,
+			}"
+		>
+		</div>
+		<apexchart v-else class="priority-multiple-notes" type="donut" width="90" :options="chartOptions" :series="chartData"></apexchart>
+		<div class="note-count"> {{ notes.length }} </div>
 		<div class="timestamp">{{ topNote.date_posted[1] | formatTime }}</div>
 	</div>
 <!-- - .note-container
@@ -36,7 +37,7 @@ export default {
          colors:['#efe9cc']
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         labels: ['Low', 'Medium', 'High'],
         fill: {
@@ -138,6 +139,15 @@ export default {
 		left: 0px;
 		z-index: 3;
 	}
+	.note-count {
+		font-size: 12px;
+		font-weight: 500;
+		color: rgb(146, 146, 146);
+		position: absolute;
+		top: 220px;
+		right: 10px;
+		z-index: 3;
+	}
 	.timestamp {
 		font-size: 12px;
 		font-weight: 500;
@@ -147,13 +157,14 @@ export default {
 		right: 10px;
 		z-index: 3;
 	}   
-	.note-stack {
-		width: 250px;
-		height: 30px;
-		background-color: $note-color;
-		border-radius: 12px 12px 12px 0px;
-		z-index: 1;
-	}
+}
+
+.note-stack {
+	width: 250px;
+	height: 30px;
+	background-color: $note-color;
+	border-radius: 12px 12px 12px 0px;
+	z-index: 1;
 	.corner {
 		position: absolute;
 		bottom: 100;
