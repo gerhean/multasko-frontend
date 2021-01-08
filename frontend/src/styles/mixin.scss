@@ -1,0 +1,23 @@
+@import "~bulma/sass/utilities/_all";
+
+$menu-item-color: white;
+$menu-item-hover-color: white;
+$menu-item-hover-background-color: #577399;
+$menu-item-active-background-color: #425879;	
+
+$side-panel-bg-color:  #495867;
+$side-panel-word-color: white;
+$side-panel-search-bg-color: #9999a7;
+
+$note-color: #efe9cc;
+$note-color-dark:#e0d49c; 
+$note-priority-high: #FB6962;
+$note-priority-medium: #FFE662;
+$note-priority-low: #79DE79;
+
+html, body {
+	overscroll-behavior: none; // prevent 'bouncing' when overscrolled
+}
+
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
