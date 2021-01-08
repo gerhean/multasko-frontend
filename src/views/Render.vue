@@ -1,8 +1,7 @@
 <template lang="pug">
     .layout
         .side-panel
-            .multasko
-                MULTASKO
+            .multasko MULTASKO
             .search
                 .field
                     .control.has-icons-left

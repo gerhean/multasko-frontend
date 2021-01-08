@@ -3,8 +3,8 @@
         .date {{ data.date }}
         .border-line
         .holder
-            Note(v-for="(note, idx) in data.memos"
-                :note="note"
+            Note(v-for="(noteGroup, idx) in data.memos"
+                :notes="noteGroup"
                 :key="idx"
             )
 </template>

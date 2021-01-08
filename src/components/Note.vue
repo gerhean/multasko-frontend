@@ -1,24 +1,74 @@
 <template lang="pug">
 .note
-    note-content {{ note.content }}
+    .note-content {{ topNote.content }}
     .holder
-        .priorities
-            priorities
+        .priorities priorities
         // check priority level and assign class accordingly for css color
         .priority(:class=`{
-				'low': note.priorityLevel == 0,
-				'medium': note.priorityLevel == 1,
-				'high': note.priorityLevel == 2,
+				'low': topNote.priorityLevel == 0,
+				'medium': topNote.priorityLevel == 1,
+				'high': topNote.priorityLevel == 2,
 			}`
 		)
-        .timestamp {{ note.timestamp }}
+        apexchart(type="donut", width="380",
+            :options="chartOptions", :series="chartData")
+        .timestamp {{ topNote.timestamp }}
 </template>
 
 <script>
+import VueApexCharts from 'vue-apexcharts'
+
 export default {
   name: 'Note',
+
+  data: function () {
+    return {
+      chartOptions: {
+        chart: {
+          width: 380,
+          type: 'donut',
+        },
+        dataLabels: {
+          enabled: false
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              show: false
+            }
+          }
+        }],
+        fill: {
+          colors: ['#F44336', '#E91E63', '#9C27B0']
+        }
+      },
+    }
+  },
+
+  components: {
+    apexchart: VueApexCharts,
+  },
+
   props: {
-      note: Object, 
+      notes: Array, 
+  },
+
+  computed: {
+    topNote: function () {
+      return this.notes[this.notes.length - 1]
+    },
+
+    chartData: function () {
+      const data = [0, 0, 0];
+      for (const note in this.notes) {
+          data[note.priorityLevel] += 1;
+      }
+      return data;
+    },
   },
 }
 </script>
