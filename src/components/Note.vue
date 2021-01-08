@@ -1,33 +1,75 @@
-<template>
-    <div class="note">
-        <div class="note-content">
-            {{ note.content }}
-        </div>
-        <div class="holder">
-            <div class="priorities">
-                priorities
-            </div>
-            <!-- check priority level and assign class accordingly for css color -->
-            <div class="priority" 
-				:class="{
-					'low': note.priorityLevel == 0,
-					'medium': note.priorityLevel == 1,
-					'high': note.priorityLevel == 2,
-				}"
-			>
-			</div>
-            <div class="timestamp">
-                {{ note.timestamp }}
-            </div>
-        </div>
-    </div>
+<template lang="pug">
+.note
+    .note-content {{ topNote.content }}
+    apexchart.priority(type="donut", width="90",
+        :options="chartOptions", :series="chartData")
+    .timestamp {{ topNote.timestamp }}
 </template>
 
 <script>
+import VueApexCharts from 'vue-apexcharts'
+
 export default {
   name: 'Note',
+
+  data: function () {
+    return {
+      chartOptions: {
+        stroke:{
+         colors:['#efe9cc']
+        },
+        dataLabels: {
+          enabled: false
+        },
+        labels: ['Low', 'Medium', 'High'],
+        fill: {
+          colors: ['#79DE79', '#FFE662', '#FB6962']
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              size: '40%'
+            }
+          }
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              show: false
+            }
+          }
+        }],
+        legend: {
+          show: false
+        },
+      },
+    }
+  },
+
+  components: {
+    apexchart: VueApexCharts,
+  },
+
   props: {
-      note: Object, 
+      notes: Array, 
+  },
+
+  computed: {
+    topNote: function () {
+      return this.notes[this.notes.length - 1]
+    },
+
+    chartData: function () {
+      const data = [0, 0, 0];
+      for (const note of this.notes) {
+          data[note.priorityLevel] += 1;
+      }
+      return data;
+    },
   },
 }
 </script>
@@ -51,41 +93,20 @@ export default {
         text-align: justify;
         color: $written-words; 
     }
-    .holder {
-        .priorities {
-            position: absolute;
-            left: 20px;
-            bottom: 20px;
-            z-index: 2;
-        }
-        .priority {
-            position: absolute;
-            bottom: 35px;
-            right: 0;
-            z-index: 2;
-            height: 20px;
-            width: 70px;
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-        }
-        .high {
-            background-color: $note-priority-high;
-        }
-        .medium {
-            background-color: $note-priority-medium;
-        }
-        .low {
-            background-color: $note-priority-low;
-        }
-        .timestamp {
-            font-size: 12px;
-            font-weight: 500;
-            color: rgb(146, 146, 146);
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            z-index: 2;
-        }
+    .priority {
+        position: absolute;
+        top: 190px;
+        left: 0px;
+        z-index: 3;
+    }
+    .timestamp {
+        font-size: 12px;
+        font-weight: 500;
+        color: rgb(146, 146, 146);
+        position: absolute;
+        top: 220px;
+        right: 10px;
+        z-index: 2;
     }
 }
 
