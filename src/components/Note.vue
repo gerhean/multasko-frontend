@@ -1,12 +1,13 @@
 <template lang="pug">
-.note-container
-    .note
-        .note-content {{ topNote.content }}
-        apexchart.priority(type="donut", width="90",
-            :options="chartOptions", :series="chartData")
-        .timestamp {{ topNote.timestamp }}
-    .note-stack.note-stack-one
-      .corner
+.note
+  .note-content {{ topNote.content }}
+  apexchart.priority(type="donut", width="90",
+      :options="chartOptions", :series="chartData")
+  .timestamp {{ topNote.timestamp }}
+//- .note-container
+//-   // https://stackoverflow.com/questions/7324722/cut-corners-using-css 
+//-   .note-stack.note-stack-one
+//-     .corner
 </template>
 
 <script>
@@ -80,65 +81,58 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "../styles/mixin.scss";
-.note-container{
+.note {
   position: relative;
   width: 250px;
   height: 250px;
+  background-color: $note-color;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  overflow: hidden;
+  border-radius: 12px 12px 12px 0px;
+  z-index: 1;
 
-  .note {
-    position: relative;
-    width: 250px;
-    height: 250px;
-    background-color: $note-color;
-    padding: 1rem;
-    margin-top: 2rem;
-    margin-right: 2rem;
-    overflow: hidden;
-    border-radius: 12px 12px 12px 0px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    z-index: 1;
-
-    .note-content {
-        font-size: 14px;
-        text-align: justify;
-        color: $written-words; 
-    }
-    .priority {
-        position: absolute;
-        top: 190px;
-        left: 0px;
-        z-index: 3;
-    }
-    .timestamp {
-        font-size: 12px;
-        font-weight: 500;
-        color: rgb(146, 146, 146);
-        position: absolute;
-        top: 220px;
-        right: 10px;
-        z-index: 3;
-    }   
+  .note-content {
+      font-size: 14px;
+      text-align: justify;
+      color: $written-words; 
   }
-  .note-stack {
-    width: 250px;
-    height: 30px;
-    background-color: $note-color;
-    border-radius: 12px 12px 12px 0px;
-    z-index: 1;
-    .corner {
+  .priority {
       position: absolute;
-      bottom: 100;
-      left: 0;
-      border-width: 0 16px 16px 0;
-      border-style: solid;
-      border-color: white $note-color-dark; 
-    }
+      top: 190px;
+      left: 0px;
+      z-index: 3;
   }
-  
-  note-stack-one {
+  .timestamp {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgb(146, 146, 146);
+      position: absolute;
+      top: 220px;
+      right: 10px;
+      z-index: 3;
+  }   
+}
+.note-stack {
+  width: 250px;
+  height: 30px;
+  background-color: $note-color;
+  border-radius: 12px 12px 12px 0px;
+  z-index: 1;
+  .corner {
     position: absolute;
-    top: 280px;
+    bottom: 100;
+    left: 0;
+    border-width: 0 16px 16px 0;
+    border-style: solid;
+    border-color: white $note-color-dark; 
   }
+}
+
+note-stack-one {
+  position: absolute;
+  top: 280px;
 }
 
 .note:before {
@@ -148,7 +142,7 @@ export default {
     left: 0;
     border-width: 0 16px 16px 0;
     border-style: solid;
-    border-color: transparent $note-color-dark; 
+    border-color: white $note-color-dark; 
 }
 
 .note::after {
