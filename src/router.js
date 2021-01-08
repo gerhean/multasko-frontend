@@ -6,6 +6,7 @@ Vue.use(Router);
 import Render from './views/Render.vue';
 import Categories from './views/Categories.vue';
 import Home from './views/Home.vue';
+import Search from './views/Search.vue';
 
 // import { initData } from './services/initData';
 
@@ -40,6 +41,10 @@ const router = new Router({
 				{
 					path: 'settings',
 					component: Home,
+				},
+				{
+					path: 'search',
+					component: Search,
 				},
 			],
 		},
