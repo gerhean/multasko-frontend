@@ -334,12 +334,24 @@ export async function postMemo(text, priority_level) {
 }
 
 export async function postCategory(categoryNames) {
-  axios.post(CATEGORY_URL, categoryNames.map((name) => ({ "name": name })));
+  const response = await axios.post(CATEGORY_URL, categoryNames.map((name) => ({ "name": name })));
 }
 
-export async function deleteCategory(id) {
+export async function putDatabaseMemo(id, text, priority_level) {
+  axios.put(MEMO_URL + `?id=${id}`, {"text": text, "priority_level": priority_level});
+}
+
+export async function putDatabaseCategory(id, name) {
+  axios.put(MEMO_URL + `?id=${id}`, {"name": name});
+}
+
+export async function deleteDatabaseMemo(id) {
+  axios.delete(MEMO_URL, id);
+}
+
+export async function deleteDatabaseCategory(id) {
   axios.delete(CATEGORY_URL, id);
-  multaskoCategoriesData.data = multaskoCategoriesData.data.filter(item => item.id !== id);
+  // multaskoCategoriesData.data = multaskoCategoriesData.data.filter(item => item.id !== id);
 }
 
 populateListOfCategories(); // remove after API function is completed
