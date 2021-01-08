@@ -1,29 +1,52 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-Vue.use(VueRouter)
+Vue.use(Router);
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-  }
-]
+import Render from './views/Render.vue';
+import Categories from './views/Categories.vue';
+import Home from './views/Home.vue';
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
+// import { initData } from './services/initData';
 
-export default router
+const router = new Router({
+	mode: 'history',
+	base: process.env.BASE_URL,
+	routes: [
+		{
+			path: '/',
+			component: Render, 
+			children: [
+				{
+					path: '',
+					component: Home,
+				},
+				{
+					path: 'categories',
+					component: Categories,
+				},
+				{
+					path: 'calendar',
+					component: Home,
+				},
+				{
+					path: 'transfer',
+					component: Home,
+				},
+				{
+					path: 'analytics',
+					component: Home,
+				},
+				{
+					path: 'settings',
+					component: Home,
+				},
+			],
+		},
+	],
+	scrollBehavior() {
+		return { x: 0, y: 0 };
+	},
+});
+
+export default router;

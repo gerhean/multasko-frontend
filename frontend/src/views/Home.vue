@@ -1,17 +1,31 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        <Banner v-for="(data, idx) in multaskoData.data"
+            :data="data"
+            :key="idx"
+        />
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Banner from '../components/Banner.vue';
+import multaskoData from '../services/initData'; 
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
-  }
+      Banner,
+  },
+  data() {
+      return {
+          multaskoData: multaskoData,
+      }
+  },
 }
 </script>
+
+<style scoped>
+.home {
+    width: 100%;
+}
+</style>
