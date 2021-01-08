@@ -68,7 +68,7 @@ export default {
   },
   methods: {
       postCategory() {
-          console.log(this.addCategoryContent);
+          console.log(this.addCategoryName);
           this.closeAddCategory();
       },
       openAddCategory() {
@@ -83,8 +83,12 @@ export default {
       },
       confirmDeleteCategory(category) {
           this.$buefy.dialog.confirm({
-              message: 'Are you sure you want to delete this category?',
-              onConfirm: () => this.deleteCategory(category), 
+                title: `Deleting "${category}" category`,
+                message: 'Are you sure you want proceed?\n This action cannot be undone.',
+                confirmText: 'Delete',
+                type: 'is-danger',
+                hasIcon: true,
+                onConfirm: () => this.deleteCategory(category), 
           })
       },
   },
