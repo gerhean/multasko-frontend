@@ -1,17 +1,22 @@
 <template lang="pug">
 .note
-    .note-content {{ topNote.content }}
+    .note-content {{ topNote.text }}
     apexchart.priority(type="donut", width="90",
         :options="chartOptions", :series="chartData")
-    .timestamp {{ topNote.timestamp }}
+    .timestamp {{ topNote.date_posted[1] | formatTime }}
 </template>
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
+import filters from '../filters';
+
+const formatTime = filters.formatTime;
 
 export default {
   name: 'Note',
-
+  filters: {
+	formatTime,
+  },
   data: function () {
     return {
       chartOptions: {
@@ -66,7 +71,7 @@ export default {
     chartData: function () {
       const data = [0, 0, 0];
       for (const note of this.notes) {
-          data[note.priorityLevel] += 1;
+          data[note.priority_level] += 1;
       }
       return data;
     },
