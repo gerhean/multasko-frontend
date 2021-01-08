@@ -5,6 +5,14 @@ $menu-item-hover-color: white;
 $menu-item-hover-background-color: #577399;
 $menu-item-active-background-color: #425879;	
 
+$modal-card-head-background-color: white;
+$modal-card-body-background-color: white;
+$modal-card-foot-background-color: white;
+$modal-card-head-border-bottom: none;
+$modal-card-foot-border-top: none;
+$modal-card-body-padding: 0 20px;
+$modal-card-title-size: 1.75rem;
+
 $side-panel-bg-color:  #495867;
 $side-panel-word-color: white;
 $side-panel-search-bg-color: #9999a7;
@@ -14,6 +22,8 @@ $note-color-dark:#e0d49c;
 $note-priority-high: #FB6962;
 $note-priority-medium: #FFE662;
 $note-priority-low: #79DE79;
+
+$written-words: rgb(110, 110, 110);
 
 html, body {
 	overscroll-behavior: none; // prevent 'bouncing' when overscrolled

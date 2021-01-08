@@ -101,7 +101,7 @@ export default {
     .note-content {
         font-size: 14px;
         text-align: justify;
-        color: rgb(110, 110, 110);
+        color: $written-words; 
     }
     .priority {
         position: absolute;
