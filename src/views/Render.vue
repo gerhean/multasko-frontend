@@ -7,9 +7,9 @@
             <div class="search">
                 <div class="field">
                     <div class="control has-icons-left">
-                        <input class="input is-info" type="text">
+                        <input class="input is-info" type="text" placeholder="Finding something?">
                         <span class="icon is-left">
-                            <i class="mdi mdi-18px mdi-magnify"></i>
+                            <i class="mdi mdi-18px mdi-magnify" style="color: black"></i>
                         </span>
                     </div>
                 </div>
@@ -135,7 +135,7 @@ export default {
       return {
           isAddingMemo: false,
           addMemoContent: '',
-          selectedNotePriority: 0,
+          selectedNotePriority: 1,
           selectedOption: 'home',
           username: 'John Doe',
       }
@@ -189,15 +189,15 @@ export default {
     .multasko {
         color: $side-panel-word-color;
         font-weight: bold;
-        font-size: 24px;
+        font-size: 32px;
         letter-spacing: 5px;
         padding-bottom: 1rem;
     }
     .search {
         padding: 1rem 2rem;
         .input {
-            background-color: $side-panel-search-bg-color;
-            color: $side-panel-word-color;
+            // background-color: $side-panel-search-bg-color;
+            // color: $side-panel-word-color;
             border: 0;
             border-radius: 15px;
         }
@@ -216,6 +216,7 @@ export default {
         width: 100%;
         color: white;
         opacity: 0.8;
+        background-color: #69798a;
         .name {
             text-transform: uppercase;
             font-weight: 800;

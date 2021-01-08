@@ -162,17 +162,32 @@ let multaskoCategoriesData = {
 	],
 };
 
+let multaskoListOfCategories = [
+	"empty",
+];
+
 export function initHomeData() {
 	// call backend
 }
 
 export function initCategoriesData() {
 	// call backend
+	populateListOfCategories();
 }
+
+function populateListOfCategories() {
+	multaskoListOfCategories.length = 0; // clear array
+	for (const item of multaskoCategoriesData.data) {
+		multaskoListOfCategories.push(item.category);
+	}
+}
+
+populateListOfCategories();
 
 const service = {
 	multaskoHomeData: multaskoHomeData,
 	multaskoCategoriesData: multaskoCategoriesData,
+	multaskoListOfCategories: multaskoListOfCategories, 
 }
 
 export default service;
