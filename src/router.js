@@ -7,6 +7,7 @@ import Render from './views/Render.vue';
 import Categories from './views/Categories.vue';
 import Home from './views/Home.vue';
 import UnderConstruction from './views/UnderConstruction.vue';
+import Search from './views/Search.vue';
 
 // import { initData } from './services/initData';
 
@@ -41,6 +42,10 @@ const router = new Router({
 				{
 					path: 'settings',
 					component: UnderConstruction,
+				},
+				{
+					path: 'search',
+					component: Search,
 				},
 			],
 		},

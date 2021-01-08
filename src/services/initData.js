@@ -1,4 +1,5 @@
 import axios from 'axios';
+import BulkSearch from "bulksearch";
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -249,6 +250,9 @@ let multaskoListOfCategories = [
   "empty",
 ];
 
+const bulkSearch = new BulkSearch();
+const memoMap = {};
+
 function populateListOfCategories() {
   multaskoListOfCategories.length = 0; // clear array
   for (const item of multaskoCategoriesData.data) {
@@ -271,10 +275,7 @@ function dateToString(dateStr) {
   return monthNames[+a[1] - 1] + " " + a[2]; 
 }
 
-export async function initHomeData() {
-  const response = await axios.get(MEMO_URL);
-
-  const memos = response.data.memos;
+function organiseMemos(memos) {
   let curDate = memos[0].date_posted[0];
   let curTime = hmsToSeconds(memos[0].date_posted[1]);
   const homeData = [];
@@ -305,8 +306,19 @@ export async function initHomeData() {
     date: dateToString(curDate),
     memos: dayGroup,
   });
+  return homeData;
+}
 
-  multaskoHomeData.data = homeData;
+export async function initHomeData() {
+  const response = await axios.get(MEMO_URL);
+  const memos = response.data.memos;
+  if (memos.length == 0) {
+    return;
+  }
+  console.dir(memos);
+  memos.forEach((memo) => {memoMap[memo.id] = memo});
+  memos.forEach((memo) => {bulkSearch.add(memo.id, memo.text)});
+  multaskoHomeData.data = organiseMemos(memos);
 }
 
 export async function initCategoriesData() {
@@ -334,8 +346,7 @@ export async function postMemo(text, priority_level) {
 }
 
 export async function postCategory(categoryNames) {
-  const response = await axios.post(CATEGORY_URL, categoryNames.map((name) => ({ "name": name })));
-  console.log(response);
+  axios.post(CATEGORY_URL, categoryNames.map((name) => ({ "name": name })));
 }
 
 export async function putDatabaseMemo(id, text, priority_level) {
@@ -355,11 +366,22 @@ export async function deleteDatabaseCategory(id) {
   // multaskoCategoriesData.data = multaskoCategoriesData.data.filter(item => item.id !== id);
 }
 
+export function searchMemo(query) {
+  const result = bulkSearch.search(query);
+  const resultMemos = result.map((id) => memoMap[id]);
+  resultMemos.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
+  if (resultMemos.length == 0) {
+    return [];
+  }
+  return organiseMemos(resultMemos);
+}
+
 populateListOfCategories(); // remove after API function is completed
 const service = {
   multaskoHomeData: multaskoHomeData,
   multaskoCategoriesData: multaskoCategoriesData,
   multaskoListOfCategories: multaskoListOfCategories, 
+  searchMemo: searchMemo,
 }
 
 // putMemo("a test message", 1);
