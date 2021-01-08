@@ -3,6 +3,7 @@
     .note-content {{ topNote.text }}
     apexchart.priority(type="donut", width="90",
         :options="chartOptions", :series="chartData")
+    .note-count {{ notes.length }} notes
     .timestamp {{ topNote.date_posted[1] | formatTime }}
 //- .note-container
 //-   // https://stackoverflow.com/questions/7324722/cut-corners-using-css 
@@ -28,7 +29,7 @@ export default {
          colors:['#efe9cc']
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         labels: ['Low', 'Medium', 'High'],
         fill: {
@@ -109,14 +110,23 @@ export default {
       left: 0px;
       z-index: 3;
   }
+  .note-count {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(146, 146, 146);
+    position: absolute;
+    top: 220px;
+    right: 10px;
+    z-index: 3;
+  }
   .timestamp {
-      font-size: 12px;
-      font-weight: 500;
-      color: rgb(146, 146, 146);
-      position: absolute;
-      top: 220px;
-      right: 10px;
-      z-index: 3;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(146, 146, 146);
+    position: absolute;
+    top: 200px;
+    right: 10px;
+    z-index: 3;
   }   
 }
 .note-stack {
