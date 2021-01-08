@@ -10,17 +10,12 @@
 
 <script>
 import Banner from '../components/Banner.vue';
-import { multaskoHomeData, searchMemo } from '../services/initData'; 
+import { searchMemo } from '../services/initData'; 
 
 export default {
   name: 'Home',
   components: {
       Banner,
-  },
-  data() {
-      return {
-          multaskoHomeData: multaskoHomeData,
-      }
   },
   computed: {
     foundMemos: function() {

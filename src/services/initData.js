@@ -313,9 +313,9 @@ export async function initHomeData() {
   const response = await axios.get(MEMO_URL);
   const memos = response.data.memos;
   if (memos.length == 0) {
+    multaskoHomeData.data = [];
     return;
   }
-  console.dir(memos);
   memos.forEach((memo) => {memoMap[memo.id] = memo});
   memos.forEach((memo) => {bulkSearch.add(memo.id, memo.text)});
   multaskoHomeData.data = organiseMemos(memos);
@@ -343,6 +343,8 @@ export async function postMemo(text, priority_level) {
   } else {
     multaskoHomeData.data[0].memos[0].push(newMemo);
   }
+  memoMap[newMemo.id] = newMemo;
+  bulkSearch.add(newMemo.id, newMemo.text);
 }
 
 export async function postCategory(categoryNames) {
@@ -370,18 +372,21 @@ export function searchMemo(query) {
   const result = bulkSearch.search(query);
   const resultMemos = result.map((id) => memoMap[id]);
   resultMemos.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
+  console.dir(resultMemos);
   if (resultMemos.length == 0) {
     return [];
   }
   return organiseMemos(resultMemos);
 }
 
-populateListOfCategories(); // remove after API function is completed
+initHomeData();
+initCategoriesData();
 const service = {
   multaskoHomeData: multaskoHomeData,
   multaskoCategoriesData: multaskoCategoriesData,
   multaskoListOfCategories: multaskoListOfCategories, 
   searchMemo: searchMemo,
+  postMemo: postMemo,
 }
 
 // putMemo("a test message", 1);

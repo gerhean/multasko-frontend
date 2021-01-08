@@ -155,6 +155,7 @@
 <script>
 // import axios from 'axios';
 import Note from '../components/Note.vue';
+import { postMemo } from '../services/initData';
 
 export default {
   name: 'Render',
@@ -177,7 +178,7 @@ export default {
   methods: {
       onEnterSearchQuery() {
         if(this.searchQuery != '') {
-          this.$router.push({path: 'search', search: { plan: this.searchQuery }});
+          this.$router.push({path: 'search', query: { search: this.searchQuery }});
         }
       },
       openNoteViewer(data) {
@@ -198,8 +199,7 @@ export default {
           this.isViewingNotes = false;
       },
       postMemo() {
-          console.log(this.addMemoContent);
-          console.log(this.selectedNotePriority);
+          postMemo(this.addMemoContent, this.selectedNotePriority);
           this.closeAddMemo();
       },
       addAnotherMemo() {
