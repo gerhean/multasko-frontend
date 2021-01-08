@@ -1,16 +1,12 @@
-<template>
-    <div class="banner">
-        <div class="date">
-            {{ data.date }}
-        </div>
-        <div class="border-line"></div>
-        <div class="holder">
-            <Note v-for="(note, idx) in data.memos"
+<template lang="pug">
+    .banner
+        .date {{ data.date }}
+        .border-line
+        .holder
+            Note(v-for="(note, idx) in data.memos"
                 :note="note"
                 :key="idx"
-            />
-        </div>
-    </div>
+            )
 </template>
 
 <script>

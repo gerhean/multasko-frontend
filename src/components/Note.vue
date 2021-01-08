@@ -1,26 +1,19 @@
-<template>
-    <div class="note">
-        <div class="note-content">
+<template lang="pug">
+    .note
+        note-content
             {{ note.content }}
-        </div>
-        <div class="holder">
-            <div class="priorities">
+        .holder
+            .priorities
                 priorities
-            </div>
             <!-- check priority level and assign class accordingly for css color -->
-            <div class="priority" 
-				:class="{
+            .priority(:class="{
 					'low': note.priorityLevel == 0,
 					'medium': note.priorityLevel == 1,
 					'high': note.priorityLevel == 2,
 				}"
-			>
-			</div>
-            <div class="timestamp">
+			)
+            .timestamp
                 {{ note.timestamp }}
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
