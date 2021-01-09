@@ -29,10 +29,12 @@ let multaskoHomeData = {
 			memos: [
 				[
 					{
-						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
-						priority_level: 0,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
+						category_id: 1,
+            date_posted: ["2021-01-08", "18:41:32"],
+            id: 5,
+            priority_level: 1,
+            text: "huat",
+            text_type: 0,
 					},
 					{
 						text: 'Have a predefined category called "purely transferring"',
@@ -292,6 +294,7 @@ function organiseMemos(memos) {
       })
       dayGroup = [];
       timeBoxGroup = [];
+      curDate = memo.date_posted[0];
     } else if (curTime - seconds > 300) {
       timeBoxGroup.reverse();
       dayGroup.push(timeBoxGroup);
@@ -371,11 +374,12 @@ export async function deleteDatabaseCategory(id) {
 
 export function searchMemo(query) {
   const result = bulkSearch.search(query);
-  const resultMemos = result.map((id) => memoMap[id]);
-  resultMemos.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
-  if (resultMemos.length == 0) {
+  if (result.length == 0) {
     return [];
   }
+  const resultMemos = result.map((id) => memoMap[id]);
+  resultMemos.sort((a, b) => (a.date_posted[0] > b.date_posted[0]) ? 1 : 
+    (a.date_posted[0] === b.date_posted[0]) ? ((a.date_posted[1] > b.date_posted[1]) ? 1 : -1) : -1 );
   return organiseMemos(resultMemos);
 }
 
