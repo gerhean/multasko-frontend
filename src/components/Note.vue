@@ -96,10 +96,10 @@ export default {
 
   computed: {
     hasOnlyOneNote: function() {
-        return this.notes.length == 1;
+        return Array.isArray(this.notes) ? this.notes.length == 1 : true;
     },
     topNote: function () {
-      return this.notes[this.notes.length - 1]
+      return Array.isArray(this.notes) ? this.notes[this.notes.length - 1] : this.notes
     },
 
     chartData: function () {
