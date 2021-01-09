@@ -173,7 +173,7 @@ export default {
           isAddingMemo: false,
           addMemoContent: '',
           selectedNotePriority: 1,
-          selectedOption: 'home',
+          selectedOption: '',
           username: 'John Doe',
           notesToView: [],
           title: '',
@@ -223,6 +223,9 @@ export default {
           this.searchQuery = '';
           this.selectedOption = option;
       }
+  },
+  created() {
+      this.selectedOption = 'home';
   },
 }
 </script>
