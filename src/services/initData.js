@@ -10,240 +10,13 @@ const CATEGORY_URL = "https://multasko-backend.herokuapp.com/api/category";
 // let lastMemoTime = 1610087437;
 
 let multaskoHomeData = {
-	data: [
-		{
-			date: 'January 6',
-			memos: [
-				[
-					{
-						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring"',
-						priority_level: 0,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-				],
-			],
-		},
-		{
-			date: 'January 6',
-			memos: [
-				[
-					{
-						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
-						priority_level: 0,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 1,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-				],
-				[
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-				]
-			],
-		},
-		{
-			date: 'January 6',
-			memos: [
-				[
-					{
-						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring"Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring"  ',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-				],
-			],
-		},
-	],
+	data: [],
 };
 
+
+
 let multaskoCategoriesData = {
-	data: [
-		{
-			id: -1,
-			name: 'Dancing',
-			memos: [
-				[
-					{
-						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
-						priority_level: 0,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 1,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-				],
-				[
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-				]
-			],
-		},
-		{
-			id: -2,
-			name: 'Singing',
-			memos: [
-				[
-					{
-						text: 'Have a predefined category called "purely transferring", Have a predefined category called "purely transferring", Have a predefined category called "purely transferring",Have a predefined category called "purely transferring" ',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 0,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-					{
-						text: 'Have a predefined category called "purely transferring"',
-						priority_level: 2,
-						text_type: 1,
-						date_posted: ["2021-01-08","07:21:46"],
-					},
-				],
-			],
-		},
-	],
+	data: [],
 };
 
 let multaskoListOfCategories = [
@@ -292,6 +65,7 @@ function organiseMemos(memos) {
       })
       dayGroup = [];
       timeBoxGroup = [];
+      curDate = memo.date_posted[0];
     } else if (curTime - seconds > 300) {
       timeBoxGroup.reverse();
       dayGroup.push(timeBoxGroup);
@@ -348,7 +122,8 @@ export async function postMemo(text, priority_level) {
 }
 
 export async function postCategory(categoryNames) {
-  axios.post(CATEGORY_URL, categoryNames.map((name) => ({ "name": name })));
+  const response = await axios.post(CATEGORY_URL, categoryNames.map((name) => ({ "name": name })));
+  multaskoCategoriesData.data.push(...response.data)
 }
 
 export async function putDatabaseMemo(id, text, priority_level) {
@@ -360,22 +135,22 @@ export async function putDatabaseCategory(id, name) {
 }
 
 export async function deleteDatabaseMemo(id) {
-  axios.delete(MEMO_URL, id);
+  axios.delete(MEMO_URL + `?id=${id}`);
 }
 
 export async function deleteDatabaseCategory(id) {
-  axios.delete(CATEGORY_URL, id);
+  axios.delete(CATEGORY_URL + `?id=${id}`);
   // multaskoCategoriesData.data = multaskoCategoriesData.data.filter(item => item.id !== id);
 }
 
 export function searchMemo(query) {
   const result = bulkSearch.search(query);
-  const resultMemos = result.map((id) => memoMap[id]);
-  resultMemos.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
-  console.dir(resultMemos);
-  if (resultMemos.length == 0) {
+  if (result.length == 0) {
     return [];
   }
+  const resultMemos = result.map((id) => memoMap[id]);
+  resultMemos.sort((a, b) => (a.date_posted[0] < b.date_posted[0]) ? 1 : 
+    (a.date_posted[0] === b.date_posted[0]) ? ((a.date_posted[1] < b.date_posted[1]) ? 1 : -1) : -1 );
   return organiseMemos(resultMemos);
 }
 
@@ -387,6 +162,8 @@ const service = {
   multaskoListOfCategories: multaskoListOfCategories, 
   searchMemo: searchMemo,
   postMemo: postMemo,
+  postCategory: postCategory,
+  deleteDatabaseCategory: deleteDatabaseCategory,
 }
 
 // putMemo("a test message", 1);
