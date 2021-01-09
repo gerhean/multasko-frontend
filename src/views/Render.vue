@@ -224,8 +224,10 @@ export default {
           this.selectedOption = option;
       }
   },
-  created() {
-      this.selectedOption = 'home';
+  mounted() {
+      const arr = window.location.href.split('/'); 
+      this.selectedOption = arr[arr.length - 1];
+    //   console.log(window.location.href.split('/'));
   },
 }
 </script>
