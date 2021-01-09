@@ -7,6 +7,15 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
 	<title><%= htmlWebpackPlugin.options.title %></title>
 	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
+	<script>
+		(function(){
+			var redirect = sessionStorage.redirect;
+			delete sessionStorage.redirect;
+			if (redirect && redirect != location.href) {
+				history.replaceState(null, null, redirect);
+			}
+		})();
+	</script>
   </head>
   <body>
     <noscript>

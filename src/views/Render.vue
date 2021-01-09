@@ -82,9 +82,11 @@
         </div>
 
         <transition appear name="change-view-transition">
-            <router-view
-                @viewnote="openNoteViewer"
-            />
+            <keep-alive>
+                <router-view
+                    @viewnote="openNoteViewer"
+                />
+            </keep-alive>
         </transition>
 
         <i v-if="selectedOption == 'home' || selectedOption == 'categories'" class="add-memo mdi mdi-36px mdi-plus-circle-outline" @click="openAddMemo"/>
