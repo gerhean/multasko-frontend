@@ -121,7 +121,11 @@ export default {
   methods: {
       emitOpenNoteViewerNote() {
         //   console.log('emit note open');
-          this.$emit('viewnote', this.notes);
+          if (Array.isArray(this.notes)) {
+            this.$emit('viewnote', this.notes);
+          } else {
+            this.$emit('viewnote', [this.notes]);
+          }
       },
   },
 }
