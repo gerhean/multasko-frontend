@@ -174,7 +174,7 @@ export default {
           isAddingMemo: false,
           addMemoContent: '',
           selectedNotePriority: 1,
-          selectedOption: 'home',
+          selectedOption: '',
           username: 'John Doe',
           notesToView: [],
           title: '',
