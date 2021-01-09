@@ -3,7 +3,7 @@
         <div class="list-of-categories">
             <div class="category-tag" 
                 v-for="(category, index) in multaskoCategoriesData.data"
-                :key="category.id"
+                :key="category.name"
             >
                 <span class="tag is-dark is-rounded is-large"> 
                     {{ category.name }}
