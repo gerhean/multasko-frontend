@@ -5,12 +5,12 @@
                 v-for="(category, index) in multaskoCategoriesData.data"
                 :key="category.name"
             >
-                <span class="tag is-dark is-rounded is-large"> 
+                <span class="tag is-dark is-rounded is-large" style="margin-bottom: 0.3rem"> 
                     {{ category.name }}
                     <i class="mdi mdi-16px mdi-close" style="margin-left: 0.5rem" @click="confirmDeleteCategory(category, index)"/> 
                 </span>
             </div>
-            <span class="tag is-info is-rounded is-large category-tag add-category" @click="openAddCategory"> 
+            <span class="tag is-info is-rounded is-large category-tag add-category" style="margin-bottom: 0.3rem" @click="openAddCategory"> 
                 Add Category 
                 <i class="mdi mdi-16px mdi-plus" style="margin-left: 0.5rem"/>
             </span>

@@ -4,6 +4,17 @@
         <div class="note" :class="{'normal-note': !isView, 'view-note': isView}" @click="emitOpenNoteViewerNote">
             <div class="note-content">
                 {{ topNote.text }}
+                <div class="note-summary" v-if="topNote.summary != null && topNote.summary.length > 0"> 
+                    Summary:
+                    <div class="holder" style="margin-bottom: 0.1rem"></div>
+                    <div
+                        class="phrase"
+                        v-for="(phrase, idx) in topNote.summary"
+                        :key="idx"
+                    >
+                        {{ phrase.trim() }}
+                    </div>
+                </div>
             </div>
             <div v-if="hasOnlyOneNote" class="priority-one-note" 
                 :class="{
@@ -134,6 +145,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "../styles/mixin.scss";
+
+.note-summary {
+    margin: 0.5rem 0rem;
+    font-weight: 600;
+    .phrase {
+        margin: 0.125rem 0rem;
+    }
+}
 
 .wrapper {
     position: relative;
