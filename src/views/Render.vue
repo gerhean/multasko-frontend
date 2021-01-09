@@ -19,7 +19,7 @@
             </div>
             <aside class="menu">
                 <ul class="menu-list">
-                    <div :class="{'is-active-view': selectedOption == 'home'}" @click="selectedOption = 'home'">
+                    <div :class="{'is-active-view': selectedOption == 'home'}" @click="selectOption('home')">
                         <router-link to="/">
                             <li><a>
                                 <i class="mdi mdi-24px mdi-home"></i>
@@ -28,7 +28,7 @@
                             </a></li>
                         </router-link>
                     </div>
-                    <div :class="{'is-active-view': selectedOption == 'categories'}" @click="selectedOption = 'categories'">
+                    <div :class="{'is-active-view': selectedOption == 'categories'}" @click="selectOption('categories')">
                         <router-link to="/categories">
                             <li><a>
                                 <i class="mdi mdi-24px mdi-folder"></i>
@@ -37,7 +37,7 @@
                             </a></li>
                         </router-link>
                     </div>
-                    <div :class="{'is-active-view': selectedOption == 'calendar'}" @click="selectedOption = 'calendar'">
+                    <div :class="{'is-active-view': selectedOption == 'calendar'}" @click="selectOption('calendar')">
                         <router-link to="/calendar">
                             <li><a>
                                 <i class="mdi mdi-24px mdi-calendar"></i>
@@ -46,7 +46,7 @@
                             </a></li>
                         </router-link>
                     </div>
-                   <div :class="{'is-active-view': selectedOption == 'transfer'}" @click="selectedOption = 'transfer'"> 
+                   <div :class="{'is-active-view': selectedOption == 'transfer'}" @click="selectOption('transfer')"> 
                         <router-link to="/transfer">
                             <li><a>
                                 <i class="mdi mdi-24px mdi-swap-horizontal"></i>
@@ -55,7 +55,7 @@
                             </a></li>
                         </router-link>
                     </div>
-                    <div :class="{'is-active-view': selectedOption == 'analytics'}" @click="selectedOption = 'analytics'"> 
+                    <div :class="{'is-active-view': selectedOption == 'analytics'}" @click="selectOption('analytics')"> 
                         <router-link to="/analytics">
                             <li><a>
                                 <i class="mdi mdi-24px mdi-google-analytics"></i>
@@ -64,7 +64,7 @@
                             </a></li>
                         </router-link>
                     </div>
-                    <div :class="{'is-active-view': selectedOption == 'settings'}" @click="selectedOption = 'settings'"> 
+                    <div :class="{'is-active-view': selectedOption == 'settings'}" @click="selectOption('settings')"> 
                         <router-link to="/settings">
                             <li><a>
                                 <i class="mdi mdi-24px mdi-cogs"></i>
@@ -116,10 +116,10 @@
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button is-success is-light is-outlined is-rounded" @click="postMemo">
-                            Stick It On!
+                            Post It! 
                         </button>
                         <button class="button is-info is-light is-outlined is-rounded" @click="addAnotherMemo">
-                            Next!
+                            Let's Post Another!
                         </button>
                         <button class="button is-warning is-light is-outlined is-rounded" @click="closeAddMemo">
                             Never Mind!
@@ -179,7 +179,8 @@ export default {
   },
   methods: {
       onEnterSearchQuery() {
-        if(this.searchQuery != '') {
+        this.selectedOption = '';
+        if (this.searchQuery != '') {
           this.$router.push({path: 'search', query: { search: this.searchQuery }});
         }
       },
@@ -204,19 +205,22 @@ export default {
           this.closeAddMemo();
       },
       addAnotherMemo() {
-          console.log(this.addMemoContent);
-          console.log(this.selectedNotePriority);
-          this.selectedNotePriority = 0;
+          postMemo(this.addMemoContent, this.selectedNotePriority);
+          this.selectedNotePriority = 1;
           this.addMemoContent = '';
       },
       closeAddMemo() {
-          this.selectedNotePriority = 0;
+          this.selectedNotePriority = 1;
           this.isAddingMemo = false;
           this.addMemoContent = '';
       },
       openAddMemo() {
           this.isAddingMemo = true; 
       },
+      selectOption(option) {
+          this.searchQuery = '';
+          this.selectedOption = option;
+      }
   },
 }
 </script>
