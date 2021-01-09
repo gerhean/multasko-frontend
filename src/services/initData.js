@@ -7,7 +7,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
 const MEMO_URL = "https://multasko-backend.herokuapp.com/api/memo";
 const CATEGORY_URL = "https://multasko-backend.herokuapp.com/api/category";
-const CATURL = "http://6c43fc4fc7ee.ngrok.io/api/categorise";
+const CATURL = "https://b5f8c6979337.ngrok.io/api/categorise";
 // let lastMemoTime = 1610087437;
 
 let multaskoHomeData = {
