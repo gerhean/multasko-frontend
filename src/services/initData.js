@@ -7,6 +7,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
 const MEMO_URL = "https://multasko-backend.herokuapp.com/api/memo";
 const CATEGORY_URL = "https://multasko-backend.herokuapp.com/api/category";
+const CATURL = "http://6c43fc4fc7ee.ngrok.io/api/categorise";
 // let lastMemoTime = 1610087437;
 
 let multaskoHomeData = {
@@ -25,11 +26,13 @@ let multaskoListOfCategories = [
 
 const bulkSearch = new BulkSearch();
 const memoMap = {};
+const catMap = {};
 
 function populateListOfCategories() {
   multaskoListOfCategories.length = 0; // clear array
   for (const item of multaskoCategoriesData.data) {
     multaskoListOfCategories.push(item.name);
+    catMap[item.name] = item;
   }
 }
 
@@ -100,6 +103,7 @@ export async function initCategoriesData() {
   multaskoCategoriesData.data = response.data.categories;
 
   populateListOfCategories();
+  initCategoriesMemoData();
 }
 
 export async function postMemo(text, priority_level) {
@@ -152,6 +156,24 @@ export function searchMemo(query) {
   resultMemos.sort((a, b) => (a.date_posted[0] < b.date_posted[0]) ? 1 : 
     (a.date_posted[0] === b.date_posted[0]) ? ((a.date_posted[1] < b.date_posted[1]) ? 1 : -1) : -1 );
   return organiseMemos(resultMemos);
+}
+
+export async function initCategoriesMemoData() {
+  const response = await axios.get(CATURL);
+  const memoGrps = response.data.result;
+  for (const grp of memoGrps) {
+    if (grp.category in catMap) {
+      catMap[grp.category].memos.push(grp.memos);
+    } else {
+      const newCat = {
+        id: -1,
+        name: grp.category,
+        memos: [grp.memos]
+      }
+      multaskoCategoriesData.data.push(newCat);
+      catMap[grp.category] = newCat;
+    }
+  }
 }
 
 initHomeData();
