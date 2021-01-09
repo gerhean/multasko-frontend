@@ -14,8 +14,6 @@ let multaskoHomeData = {
 	data: [],
 };
 
-
-
 let multaskoCategoriesData = {
 	data: [],
 };
@@ -178,6 +176,7 @@ export async function initCategoriesMemoData() {
 
 initHomeData();
 initCategoriesData();
+
 const service = {
   multaskoHomeData: multaskoHomeData,
   multaskoCategoriesData: multaskoCategoriesData,

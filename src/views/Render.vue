@@ -3,7 +3,8 @@
         <div class="side-panel"> 
             <router-link to="/">
                 <div class="multasko" @click="selectedOption = 'home'">
-                    MULTASKO
+                    <img src=../../public/assets/Memtako.svg width="100" height="100">
+                    <div>MULTASKO</div>
                 </div>
             </router-link>
             <div class="search">
@@ -173,7 +174,7 @@ export default {
           isAddingMemo: false,
           addMemoContent: '',
           selectedNotePriority: 1,
-          selectedOption: '',
+          selectedOption: 'home',
           username: 'John Doe',
           notesToView: [],
           title: '',
